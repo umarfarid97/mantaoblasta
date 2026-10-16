@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SawToothDivider } from './SawToothDivider';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  ChevronDown
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -17,7 +13,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onExploreClick,
 }) => {
   const [scrollY, setScrollY] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     let ticking = false;
@@ -35,25 +30,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const dishes = [
-    {
-      title: 'GOLDEN MANTAO',
-      tagline: 'Soon-to-be classic. Soon-to-be devoured.',
-      subtext: 'Deep-fried golden brown pillows drizzled with our signature creamy spiced buttermilk dip.',
-      image: `${import.meta.env.BASE_URL}mantao-box.png`,
-      badge: 'Malaysian Event Favorite',
-    },
-    {
-      title: 'CREAMY BUTTERMILK DIP',
-      tagline: 'Velvety rich. Aromatic chili flakes & curry leaves.',
-      subtext: 'Crafted with premium dairy butter, evaporated milk, and fragrant bird’s eye chili.',
-      image: `${import.meta.env.BASE_URL}mantao-box.png`,
-      badge: '#1 Signature Dip',
-    }
-  ];
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % dishes.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + dishes.length) % dishes.length);
+  const heroItem = {
+    title: 'GOLDEN MANTAO',
+    tagline: 'Soon-to-be classic. Soon-to-be devoured.',
+    subtext: 'Deep-fried golden brown pillows drizzled with our signature creamy spiced buttermilk dip.',
+    image: `${import.meta.env.BASE_URL}mantao-box.png`,
+  };
 
   return (
     <section className="relative cream-canvas overflow-hidden pt-10 pb-16 lg:pt-14 lg:pb-24 select-none">
@@ -93,18 +75,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
-            <AnimatePresence mode="wait">
-              <motion.h1
-                key={`title-${currentSlide}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#C4272F] tracking-tight uppercase drop-shadow-sm"
-              >
-                {dishes[currentSlide].title}
-              </motion.h1>
-            </AnimatePresence>
+            <h1 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl text-[#C4272F] tracking-tight uppercase drop-shadow-sm">
+              {heroItem.title}
+            </h1>
           </motion.div>
 
           {/* Subtitle in red/warm brown script/italic with entrance animation */}
@@ -113,18 +86,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
           >
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={`tagline-${currentSlide}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="font-script text-xl sm:text-2xl lg:text-3xl text-[#9E2A2B] tracking-wide"
-              >
-                {dishes[currentSlide].tagline}
-              </motion.p>
-            </AnimatePresence>
+            <p className="font-script text-xl sm:text-2xl lg:text-3xl text-[#9E2A2B] tracking-wide">
+              {heroItem.tagline}
+            </p>
           </motion.div>
 
           {/* Subtext description with entrance animation */}
@@ -133,67 +97,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={`subtext-${currentSlide}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="max-w-xl mx-auto text-xs sm:text-sm text-[#6C5343] font-medium pt-1"
-              >
-                {dishes[currentSlide].subtext}
-              </motion.p>
-            </AnimatePresence>
+            <p className="max-w-xl mx-auto text-xs sm:text-sm text-[#6C5343] font-medium pt-1">
+              {heroItem.subtext}
+            </p>
           </motion.div>
         </div>
 
-        {/* Carousel Food Visual Showcase with entrance animation */}
+        {/* Hero Food Visual Showcase with entrance animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.93, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
           className="relative max-w-2xl mx-auto py-6 sm:py-8 flex items-center justify-center"
         >
-          {/* Left Arrow Button matching reference */}
-          <button
-            onClick={prevSlide}
-            aria-label="Previous slide"
-            className="absolute left-1 sm:left-0 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FAF5EB]/90 hover:bg-[#FAF5EB] text-[#6C5343] hover:text-[#C4272F] flex items-center justify-center shadow-md border border-[#E0D3C1] transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
-          </button>
-
-          {/* Central Hero Image: The user's actual Malaysian fried golden mantao with buttermilk dip */}
+          {/* Central Hero Image: Malaysian fried golden mantao with buttermilk dip */}
           <div className="relative group max-w-full">
             {/* Background radial glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-amber-400/20 via-orange-300/10 to-transparent rounded-full blur-2xl transform scale-90 -z-10" />
 
             {/* Platter Card with soft drop shadow */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl p-2 sm:p-3 bg-white/70 backdrop-blur-sm border-2 border-[#EADCC9] transition-transform duration-500 group-hover:scale-[1.02] max-w-full">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={`image-${currentSlide}`}
-                  src={dishes[currentSlide].image}
-                  alt="Malaysian Style Golden Fried Mantao with Buttermilk Dip"
-                  initial={{ opacity: 0.8, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0.8, scale: 0.98 }}
-                  transition={{ duration: 0.35 }}
-                  className="w-full max-w-[460px] sm:max-w-[500px] h-auto rounded-2xl object-cover shadow-inner"
-                />
-              </AnimatePresence>
+              <img
+                src={heroItem.image}
+                alt="Malaysian Style Golden Fried Mantao with Buttermilk Dip"
+                className="w-full max-w-[460px] sm:max-w-[500px] h-auto rounded-2xl object-cover shadow-inner"
+              />
             </div>
           </div>
-
-          {/* Right Arrow Button matching reference */}
-          <button
-            onClick={nextSlide}
-            aria-label="Next slide"
-            className="absolute right-1 sm:right-0 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FAF5EB]/90 hover:bg-[#FAF5EB] text-[#6C5343] hover:text-[#C4272F] flex items-center justify-center shadow-md border border-[#E0D3C1] transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
-          </button>
         </motion.div>
 
         {/* Action Button with entrance animation */}
