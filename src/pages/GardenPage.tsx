@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, MessageCircle, Users, Utensils } from 'lucide-react';
 import { SIGNATURE_SAUCES } from '../data/packagesData';
 import { EVENT_PACKAGES } from '../data/eventPackages';
 import { EventSlideshow } from '../components/EventSlideshow';
@@ -52,7 +52,7 @@ export function GardenPage() {
             <button className="garden-button" onClick={() => scrollTo('garden-menu')}>Explore event packages <ArrowDown size={16} /></button>
             <div className="garden-hero-notes"><span><Flame />Golden fried<br />on event day</span><span><Heart />Made for<br />sharing</span><span><Utensils />Signature<br />creamy dips</span></div>
           </div>
-          <div className="garden-hero-photo"><img src={asset('mantao-plate.jpg')} alt="Golden fried mantao drizzled with creamy sauce on a sharing plate" fetchPriority="high" /><span className="garden-photo-note"><Leaf size={25} />Malaysian<br />comfort, shared.</span></div>
+          <div className="garden-hero-photo"><img src={asset('mantao-plate.jpg')} alt="Golden fried mantao drizzled with creamy sauce on a sharing plate" fetchPriority="high" /></div>
           <svg className="garden-wave" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 55C160-40 300 110 540 40S930 25 1200 60V80H0Z" fill="currentColor" /></svg>
         </section>
 
