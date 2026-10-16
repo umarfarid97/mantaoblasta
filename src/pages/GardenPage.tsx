@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowUpRight, ChefHat, Flame, Heart, Leaf, MessageCircle, Plus, Users, Utensils } from 'lucide-react';
 import { WEDDING_PACKAGES, SIGNATURE_SAUCES } from '../data/packagesData';
 import type { Currency, WeddingPackage } from '../types';
@@ -11,6 +11,20 @@ const currencyLabels = { MYR: 'RM', SGD: 'S$', USD: '$' };
 const currentYear = new Date().getFullYear();
 
 export function GardenPage() {
+  useEffect(() => {
+    document.documentElement.classList.add('garden-active');
+    const existingTheme = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    const theme = existingTheme ?? document.createElement('meta');
+    const previousColor = theme.content;
+    theme.name = 'theme-color';
+    theme.content = '#edf0e3';
+    if (!existingTheme) document.head.appendChild(theme);
+    return () => {
+      document.documentElement.classList.remove('garden-active');
+      if (existingTheme) theme.content = previousColor;
+      else theme.remove();
+    };
+  }, []);
   const [currency, setCurrency] = useState<Currency>('MYR');
   const [selected, setSelected] = useState<WeddingPackage>(WEDDING_PACKAGES[1]);
   const [enquiry, setEnquiry] = useState(false);
