@@ -31,10 +31,10 @@ export function EventSlideshow() {
         alt={alt} loading={photoIndex === 0 ? 'eager' : 'lazy'} decoding="async" width={960} height={1280} draggable={false} />)}
     </div>
     <div className="garden-gallery-controls">
+      <p className="garden-gallery-hint">Swipe to see more</p>
       <button disabled={index === 0} onClick={() => change(-1)} aria-label="Previous event photo"><ChevronLeft size={20} /></button>
       <span aria-live="polite">{index + 1} / {photos.length}</span>
       <button disabled={index === photos.length - 1} onClick={() => change(1)} aria-label="Next event photo"><ChevronRight size={20} /></button>
     </div>
-    <p className="garden-gallery-hint">Swipe to see more</p>
   </div>;
 }

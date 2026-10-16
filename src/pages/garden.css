@@ -48,14 +48,14 @@
 .garden-story>.garden-gallery{position:relative;padding:0;background:#263329;width:100%;align-self:stretch;min-width:0;overflow:hidden}
 .garden-gallery-photos{display:flex;width:100%;position:relative;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .garden-gallery-photos::-webkit-scrollbar{display:none}
-.garden-gallery-photos img{position:static;display:block;flex:0 0 100%;min-width:0;width:100%;height:auto;aspect-ratio:3 / 4;object-fit:contain;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
-.garden-gallery-controls{position:static;min-height:52px;display:flex;align-items:center;justify-content:center;gap:13px;background:#263329;color:#fff8ec}
+.garden-gallery-photos img{position:static;display:block;flex:0 0 100%;min-width:0;width:100%;height:auto;aspect-ratio:3 / 4;object-fit:cover;object-position:center;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
+.garden-gallery-controls{position:static;min-height:56px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;gap:4px;background:#263329;color:#fff8ec}
 .garden-gallery-controls button{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:#fff8ec}
 .garden-gallery-controls button:hover{background:#395b43}
 .garden-gallery-controls button:disabled{opacity:.35;cursor:default}
 .garden-gallery-controls span{font-size:12px;font-variant-numeric:tabular-nums;min-width:42px;text-align:center}
 .garden-gallery-controls button svg{color:inherit}
-.garden-story .garden-gallery-hint{margin:0;padding:0 12px 15px;max-width:none;text-align:center;font-size:11px;color:#e2e9d9}
+.garden-story .garden-gallery-hint{margin:0;padding:0;max-width:none;text-align:left;font-size:11px;color:#e2e9d9;white-space:nowrap;flex:1}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
