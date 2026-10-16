@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
-import { WEDDING_PACKAGES, SIGNATURE_SAUCES } from '../data/packagesData';
+import { SIGNATURE_SAUCES } from '../data/packagesData';
+import { EVENT_PACKAGES } from '../data/eventPackages';
 import type { WeddingPackage } from '../types';
 import { EnquiryModal } from '../components/EnquiryModal';
 import './garden.css';
@@ -27,13 +28,13 @@ export function GardenPage() {
   const [packageIndex, setPackageIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const reducedMotion = useReducedMotion();
-  const pkg = WEDDING_PACKAGES[packageIndex];
-  const [selected, setSelected] = useState<WeddingPackage>(WEDDING_PACKAGES[1]);
+  const pkg = EVENT_PACKAGES[packageIndex];
+  const [selected, setSelected] = useState<WeddingPackage>(EVENT_PACKAGES[0]);
   const [enquiry, setEnquiry] = useState(false);
   const enquire = (chosenPackage = pkg) => { setSelected(chosenPackage); setEnquiry(true); };
   const switchPackage = (step: number) => {
     setDirection(step);
-    setPackageIndex(index => (index + step + WEDDING_PACKAGES.length) % WEDDING_PACKAGES.length);
+    setPackageIndex(index => (index + step + EVENT_PACKAGES.length) % EVENT_PACKAGES.length);
   };
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 
@@ -86,18 +87,17 @@ export function GardenPage() {
             onDragEnd={(_, info) => {
               if (Math.abs(info.offset.x) > 55 || Math.abs(info.velocity.x) > 450) switchPackage(info.offset.x === 0 ? (info.velocity.x < 0 ? 1 : -1) : (info.offset.x < 0 ? 1 : -1));
             }}>
-            <div className={`garden-package-image garden-crop-${packageIndex}`}><img src={asset(packageIndex === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={packageIndex === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="eager" /></div>
-            <span className="garden-package-label">{pkg.isPopular ? 'The crowd favourite' : pkg.liveFryBarIncluded ? 'With live frying' : 'For your inner circle'}</span>
-            <h3>{pkg.name}</h3><p>{pkg.paxRange}</p><strong>RM {pkg.prices.MYR.toLocaleString()}</strong>
-            <p className="garden-package-detail">{pkg.dipsCount} signature dips · {pkg.liveFryBarIncluded ? '2 on-site chefs' : 'Warm serving station'}</p>
-            <details onPointerDown={event => event.stopPropagation()}><summary>What’s included</summary><p>{pkg.subtitle}</p><p>{pkg.mantaoCount}</p><p>{pkg.setupType}</p><ul>{[...pkg.features, ...pkg.extras].map(item => <li key={item}>{item}</li>)}</ul><p>{pkg.idealFor}</p></details>
+            <h3>{pkg.name}</h3><p>{pkg.paxRange}</p>
+            <strong>RM {pkg.pricePerGuestMYR?.toFixed(2)}<span className="garden-per-guest"> / guest</span></strong>
+            <ul className="garden-package-inclusions">{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul>
+            <p className="garden-package-example">Example: {pkg.exampleGuests?.toLocaleString()} guests · <b>RM {pkg.prices.MYR.toLocaleString()}</b></p>
             <button onPointerDown={event => event.stopPropagation()} onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
           </motion.article>
           </AnimatePresence>
           </div>
           <button className="garden-package-arrow garden-package-next" onClick={() => switchPackage(1)} aria-label="Next package" aria-controls="garden-current-package"><ChevronRight size={26} /></button>
           </div>
-          <p className="garden-package-position" role="status">{pkg.name} · {packageIndex + 1} of {WEDDING_PACKAGES.length}<span>Swipe to explore packages</span></p>
+          <p className="garden-package-position" role="status">{pkg.name} · {packageIndex + 1} of {EVENT_PACKAGES.length}<span>Swipe to explore packages</span></p>
         </section>
 
         <section className="garden-dips" id="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <div className="garden-dip" key={sauce.id}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{sauce.spiceLevel} · {sauce.tags.join(' · ')}</small></span></div>)}</div></section>
@@ -108,6 +108,6 @@ export function GardenPage() {
       </main>
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span><a href="#/">View original website <ArrowUpRight size={14} /></a></footer>
     </div>
-    <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency="MYR" onSelectAnotherPackage={setSelected} />
+    <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency="MYR" onSelectAnotherPackage={setSelected} packages={EVENT_PACKAGES} />
   </div>;
 }

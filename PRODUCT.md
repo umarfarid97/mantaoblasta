@@ -16,4 +16,6 @@ React, TypeScript and Vite. Keep the original website available. The separate re
 
 ## Brand Commitments
 
+The garden page offers Golden Mantao and Mantao ButterClam in Silver (100–300), Gold (301–500) and Platinum (501–1,000) guest tiers. User-supplied rates per guest: Golden Mantao RM4.80 / RM4.50 / RM4.20; ButterClam RM9.00 / RM8.50 / RM8.00. Both include three mantao per guest; ButterClam includes approximately 60 g clam per guest, serving crew, booth setup and dismantling. Cards show example totals for 300 / 500 / 1,000 guests. Enquiry totals use the entered guest count. The supplied price table does not specify included dip quantities.
+
 Use Blasta branding and existing food photographs. The user requested a separate design based on the supplied cream, sage green and orange café reference.

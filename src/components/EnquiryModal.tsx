@@ -18,6 +18,7 @@ interface EnquiryModalProps {
   selectedPackage: WeddingPackage | null;
   currency: Currency;
   onSelectAnotherPackage: (pkg: WeddingPackage) => void;
+  packages?: WeddingPackage[];
 }
 
 const WHATSAPP_NUMBER = '60182868402';
@@ -55,8 +56,9 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   selectedPackage,
   currency,
   onSelectAnotherPackage,
+  packages = WEDDING_PACKAGES,
 }) => {
-  const currentPkg = selectedPackage || WEDDING_PACKAGES[1];
+  const currentPkg = selectedPackage || packages[1] || packages[0];
   const hiddenDateInputRef = useRef<HTMLInputElement>(null);
 
   const [hostName, setHostName] = useState('');
@@ -73,7 +75,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
   // Keep dips selection strictly clamped to current package limit whenever package changes or modal opens
   useEffect(() => {
-    setGuestCount(currentPkg.minPax + 50);
+    setGuestCount(currentPkg.exampleGuests ?? currentPkg.minPax + 50);
     setSelectedDips((prev) => {
       if (prev.length > currentPkg.dipsCount) {
         return prev.slice(0, currentPkg.dipsCount);
@@ -84,7 +86,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       }
       return prev;
     });
-  }, [currentPkg.id, currentPkg.dipsCount, currentPkg.minPax, isOpen]);
+  }, [currentPkg.id, currentPkg.dipsCount, currentPkg.minPax, currentPkg.exampleGuests, isOpen]);
 
   if (!isOpen) return null;
 
@@ -105,13 +107,15 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   };
 
   const getPriceString = () => {
-    const amount = currentPkg.prices[currency];
+    const amount = currency === 'MYR' && currentPkg.pricePerGuestMYR !== undefined
+      ? Math.round(currentPkg.pricePerGuestMYR * guestCount * 100) / 100
+      : currentPkg.prices[currency];
     const prefix = currency === 'MYR' ? 'RM ' : currency === 'SGD' ? 'S$' : '$';
-    return `${prefix}${amount.toLocaleString()}`;
+    return `${prefix}${amount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
   };
 
   const generateWhatsAppMessage = () => {
-    const dipsList = selectedDips
+    const dipsList = currentPkg.dipsCount === 0 ? 'Not specified for this menu' : selectedDips
       .map((id) => SIGNATURE_SAUCES.find((s) => s.id === id)?.name)
       .filter(Boolean)
       .join(', ');
@@ -181,7 +185,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   Selected Event Tier:
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  {WEDDING_PACKAGES.map((pkg) => (
+                  {packages.map((pkg) => (
                     <button
                       key={pkg.id}
                       type="button"
@@ -208,7 +212,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       <p className="text-[11px] text-[#6C5343] font-medium">{pkg.paxRange}</p>
                       <p className="text-xs font-heading font-extrabold text-[#C4272F] mt-1">
                         {currency === 'MYR' ? 'RM ' : currency === 'SGD' ? 'S$' : '$'}
-                        {pkg.prices[currency].toLocaleString()}
+                        {pkg.pricePerGuestMYR !== undefined ? `${pkg.pricePerGuestMYR.toFixed(2)} / guest` : pkg.prices[currency].toLocaleString()}
                       </p>
                     </button>
                   ))}
@@ -331,6 +335,8 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   </label>
                   <input
                     type="number"
+                    required
+                    step={1}
                     min={currentPkg.minPax}
                     max={currentPkg.maxPax}
                     value={guestCount}
@@ -356,7 +362,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               </div>
 
               {/* Preferred Dips Selection */}
-              <div className="space-y-2 pt-1">
+              {currentPkg.dipsCount > 0 && <div className="space-y-2 pt-1">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-heading font-bold text-[#2F1B11] uppercase">
                     Select Up To {currentPkg.dipsCount} Signature Dips:
@@ -388,6 +394,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 </div>
               </div>
 
+              }
               {/* Special Requests */}
               <div>
                 <label className="block text-xs font-heading font-bold text-[#2F1B11] uppercase mb-1">
@@ -406,7 +413,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <div className="p-3.5 rounded-2xl bg-[#EFE2CF] border border-[#DAC4AD] flex items-center justify-between text-xs">
                 <div>
                   <p className="font-heading font-bold text-[#2F1B11]">Package Total: {getPriceString()}</p>
-                  <p className="text-[11px] text-[#6C5343]">Includes {currentPkg.mantaoCount.split('(')[0]}</p>
+                  <p className="text-[11px] text-[#6C5343]">{currentPkg.pricePerGuestMYR !== undefined ? `${guestCount.toLocaleString()} guests × RM ${currentPkg.pricePerGuestMYR.toFixed(2)} · ${(guestCount * 3).toLocaleString()} mantao` : `Includes ${currentPkg.mantaoCount.split('(')[0]}`}</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-emerald-800 font-bold text-[11px]">
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />

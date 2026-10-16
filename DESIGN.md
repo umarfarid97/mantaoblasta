@@ -8,4 +8,6 @@ Tokens are scoped under .garden-page: cream #f6f1e5, sage #b6c4ad, green #395b43
 
 The package section heading sits on the cream canvas above a layered sage card deck. Show one package at a time in RM, with horizontal drag/swipe, arrow buttons and keyboard arrows. Use directional spring transitions and immediate changes for reduced motion. Keep vertical page scrolling available during touch gestures. The enquiry uses the displayed package. Dips are inline, without a flavour popup on this route.
 
+Package cards are compact, with no pictures or expandable details. The six cards cover three tiers each for Golden Mantao and Mantao ButterClam, using src/data/eventPackages.ts. Show the guest range, rate per guest, short inclusions and an explicitly labelled example total. Enquiry totals calculate from actual guest count. Keep the original homepage's legacy package data separate.
+
 Reuse the existing enquiry dialog. Route with a hash so static GitHub Pages hosting supports direct links. Keep original page markup and styles intact.

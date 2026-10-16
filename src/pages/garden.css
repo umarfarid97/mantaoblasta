@@ -35,6 +35,15 @@
 .garden-package-position{margin:39px 0 0;font-size:12px}
 .garden-package-position>span{display:block;margin-top:7px;font-size:11px;color:#536449}
 @media(max-width:680px){.garden-package-carousel{width:94%;padding:8px 6px 0}.garden-package-carousel .garden-package-intro{padding-bottom:28px}.garden-package-carousel .garden-package-intro h2{font-size:31px}.garden-package-carousel .garden-package{padding:27px 30px;min-height:470px}.garden-package-carousel .garden-package-arrow{width:40px;height:44px;top:225px}.garden-package-carousel .garden-package h3{font-size:25px}.garden-card-deck{margin:0 12px}.garden-package-prev{left:0}.garden-package-next{right:0}}
+.garden-package-carousel .garden-package{min-height:340px;padding:36px 55px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.garden-package-carousel .garden-package h3{font-size:28px;line-height:1.25;margin-bottom:12px}
+.garden-package-carousel .garden-package>strong{font-size:33px;margin:10px 0}
+.garden-per-guest{font-size:13px;font-weight:400}
+.garden-package-inclusions{list-style:none;padding:0;margin:10px 0;font-size:13px;line-height:1.7;max-width:360px}
+.garden-package-inclusions li+li{margin-top:5px}
+.garden-package-carousel .garden-package .garden-package-example{font-size:12px;margin:12px 0 15px;line-height:1.6}
+.garden-package-carousel .garden-package-arrow{top:145px}
+@media(max-width:680px){.garden-package-carousel .garden-package{min-height:350px;padding:28px 29px}.garden-package-carousel .garden-package h3{font-size:25px}.garden-package-carousel .garden-package-arrow{top:150px}.garden-package-inclusions{font-size:12px}}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}

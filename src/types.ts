@@ -25,6 +25,9 @@ export interface WeddingPackage {
   idealFor: string;
   liveFryBarIncluded: boolean;
   accentColor: string;
+  pricePerGuestMYR?: number;
+  exampleGuests?: number;
+  menuType?: 'Golden Mantao' | 'Mantao ButterClam';
 }
 
 export type Currency = 'MYR' | 'SGD' | 'USD';
