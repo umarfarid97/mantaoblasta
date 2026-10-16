@@ -39,7 +39,7 @@ export function GardenPage() {
     <a className="garden-skip" href="#garden-menu" onClick={e => { e.preventDefault(); document.getElementById('garden-menu')?.focus(); scrollTo('garden-menu'); }}>Skip to packages</a>
     <div className="garden-sheet">
       <header className="garden-header">
-        <a href="#/garden" className="garden-brand" aria-label="Blasta Empire home"><img src={asset('blasta-logo-dark.png')} alt="blasta EMPIRE" /><span>Little buns. Big celebrations.</span></a>
+        <a href="#/garden" className="garden-brand" aria-label="Blasta Empire home"><img src={asset('blasta-logo-dark.png')} alt="blasta EMPIRE" /></a>
         <nav aria-label="Main navigation"><button onClick={() => scrollTo('garden-menu')}>Packages</button><button onClick={() => scrollTo('garden-story')}>Our mantao</button><button onClick={() => scrollTo('garden-dips')}>Signature dips</button><button onClick={() => scrollTo('garden-contact')}>Contact</button></nav>
         <button className="garden-button" onClick={() => enquire()}>Plan your event <ArrowUpRight size={16} /></button>
       </header>

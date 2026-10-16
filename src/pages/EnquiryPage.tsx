@@ -51,7 +51,7 @@ export function EnquiryPage() {
   };
 
   return <div className="garden-page garden-enquiry-page"><div className="garden-sheet">
-    <header className="garden-header"><a href="#/garden" className="garden-brand"><img src={`${import.meta.env.BASE_URL}blasta-logo-dark.png`} alt="blasta EMPIRE" /><span>Little buns. Big celebrations.</span></a><a className="garden-back-link" href="#/garden"><ArrowLeft size={17} /> Back to website</a></header>
+    <header className="garden-header"><a href="#/garden" className="garden-brand"><img src={`${import.meta.env.BASE_URL}blasta-logo-dark.png`} alt="blasta EMPIRE" /></a><a className="garden-back-link" href="#/garden"><ArrowLeft size={17} /> Back to website</a></header>
     <main className="garden-enquiry-main">
       <div className="garden-enquiry-intro"><h1>Let’s plan your event.</h1><p>A few details, a little Blasta. Tell us what you have in mind and we’ll check availability on WhatsApp.</p></div>
       <form className="garden-enquiry-layout" onSubmit={submit}>

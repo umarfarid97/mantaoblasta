@@ -84,6 +84,8 @@
 .garden-enquiry-summary .garden-enquiry-note{margin-top:15px;font-size:11px;color:#475d41}
 .garden-enquiry-feedback{margin-top:15px;padding-top:15px;border-top:1px solid #aab99d}
 @media(max-width:740px){.garden-enquiry-main{padding:32px 6% 35px}.garden-enquiry-layout{grid-template-columns:minmax(0,1fr);gap:24px}.garden-enquiry-summary{position:static;padding:24px}.garden-form-row{grid-template-columns:minmax(0,1fr)}.garden-enquiry-page .garden-header{flex-wrap:nowrap}.garden-enquiry-page .garden-back-link{font-size:12px}.garden-enquiry-page .garden-brand span{display:none}.garden-enquiry-intro{margin-bottom:30px}}
+.garden-brand img{width:160px;height:70px}
+@media(max-width:680px){.garden-brand img{width:135px;height:60px}}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
