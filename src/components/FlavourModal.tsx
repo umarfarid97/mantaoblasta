@@ -90,7 +90,7 @@ export const FlavourModal: React.FC<FlavourModalProps> = ({ isOpen, onClose }) =
           {/* User's uploaded picture highlight box */}
           <div className="p-4 rounded-2xl bg-[#EFE2CF] border border-[#DAC4AD] flex flex-col sm:flex-row items-center gap-4 text-xs text-[#4A3222]">
             <img
-              src="/mantao-box.png"
+              src={`${import.meta.env.BASE_URL}mantao-box.png`}
               alt="Golden Mantao Box with Buttermilk Dip"
               className="w-20 h-20 rounded-xl object-cover border border-[#C5AD95] shadow-sm shrink-0"
             />

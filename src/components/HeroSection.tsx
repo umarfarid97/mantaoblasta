@@ -40,14 +40,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       title: 'GOLDEN MANTAO',
       tagline: 'Soon-to-be classic. Soon-to-be devoured.',
       subtext: 'Deep-fried golden brown pillows drizzled with our signature creamy spiced buttermilk dip.',
-      image: '/mantao-box.png',
+      image: `${import.meta.env.BASE_URL}mantao-box.png`,
       badge: 'Malaysian Event Favorite',
     },
     {
       title: 'CREAMY BUTTERMILK DIP',
       tagline: 'Velvety rich. Aromatic chili flakes & curry leaves.',
       subtext: 'Crafted with premium dairy butter, evaporated milk, and fragrant bird’s eye chili.',
-      image: '/mantao-box.png',
+      image: `${import.meta.env.BASE_URL}mantao-box.png`,
       badge: '#1 Signature Dip',
     }
   ];

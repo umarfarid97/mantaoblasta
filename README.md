@@ -2,6 +2,8 @@
 
 > Premium Malaysian Golden Fried Mantao Event & Wedding Catering Packages.
 
+🌐 **Live Website**: [https://umarfarid97.github.io/mantaoblasta/](https://umarfarid97.github.io/mantaoblasta/)
+
 ## Overview
 
 **mantaoblasta** is a high-converting, modern landing page for an artisan live mantao catering service in Malaysia. It showcases golden crispy fried mantao with signature dips (Buttermilk, Salted Egg Butter, Sweet Pandan Glaze, and Sweet Sambal) for weddings, corporate galas, and private celebrations.
@@ -33,11 +35,18 @@ npm install
 npm run dev
 ```
 
-### Production Build
+### Production Build & Preview
 ```bash
 npm run build
 npm run preview
 ```
+
+### Deploy to GitHub Pages
+To manually rebuild and push to the `gh-pages` branch:
+```bash
+npm run deploy
+```
+*(Automated CI/CD via GitHub Actions is also configured on every push to `main`)*
 
 ## License
 MIT
