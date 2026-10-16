@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
 import { WEDDING_PACKAGES, SIGNATURE_SAUCES } from '../data/packagesData';
 import type { WeddingPackage } from '../types';
@@ -24,11 +25,16 @@ export function GardenPage() {
     };
   }, []);
   const [packageIndex, setPackageIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const reducedMotion = useReducedMotion();
   const pkg = WEDDING_PACKAGES[packageIndex];
   const [selected, setSelected] = useState<WeddingPackage>(WEDDING_PACKAGES[1]);
   const [enquiry, setEnquiry] = useState(false);
   const enquire = (chosenPackage = pkg) => { setSelected(chosenPackage); setEnquiry(true); };
-  const switchPackage = (direction: number) => setPackageIndex(index => (index + direction + WEDDING_PACKAGES.length) % WEDDING_PACKAGES.length);
+  const switchPackage = (step: number) => {
+    setDirection(step);
+    setPackageIndex(index => (index + step + WEDDING_PACKAGES.length) % WEDDING_PACKAGES.length);
+  };
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 
   return <div className="garden-page">
@@ -58,19 +64,40 @@ export function GardenPage() {
 
         <section className="garden-packages garden-package-carousel" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title" aria-roledescription="carousel">
           <div className="garden-package-intro"><h2 id="garden-packages-title">A gathering. A celebration.<br /><em>A little Blasta.</em></h2><p>Find a package for your people.<br />We’ll bring the golden goodness.</p></div>
-          <div className="garden-package-stage">
+          <div className="garden-package-stage" tabIndex={0} aria-label="Package cards. Swipe or use left and right arrow keys to change package." onKeyDown={event => {
+            if (event.target !== event.currentTarget) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault();
+              switchPackage(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          }}>
           <button className="garden-package-arrow garden-package-prev" onClick={() => switchPackage(-1)} aria-label="Previous package" aria-controls="garden-current-package"><ChevronLeft size={26} /></button>
-          <article className="garden-package" id="garden-current-package" key={pkg.id} aria-live="polite" aria-atomic="true">
+          <div className="garden-card-deck">
+          <AnimatePresence initial={false} mode="wait" custom={direction}>
+          <motion.article className="garden-package" id="garden-current-package" key={pkg.id}
+            custom={direction}
+            variants={{
+              enter: (step: number) => ({ x: reducedMotion ? 0 : step * 90, opacity: reducedMotion ? 1 : 0, rotate: reducedMotion ? 0 : step * 3, scale: reducedMotion ? 1 : .96 }),
+              active: { x: 0, opacity: 1, rotate: 0, scale: 1 },
+              exit: (step: number) => ({ x: reducedMotion ? 0 : step * -150, opacity: reducedMotion ? 1 : 0, rotate: reducedMotion ? 0 : step * -5, scale: reducedMotion ? 1 : .96 }),
+            }} initial="enter" animate="active" exit="exit"
+            transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 340, damping: 32, mass: .8 }}
+            drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={.55} dragSnapToOrigin
+            onDragEnd={(_, info) => {
+              if (Math.abs(info.offset.x) > 55 || Math.abs(info.velocity.x) > 450) switchPackage(info.offset.x === 0 ? (info.velocity.x < 0 ? 1 : -1) : (info.offset.x < 0 ? 1 : -1));
+            }}>
             <div className={`garden-package-image garden-crop-${packageIndex}`}><img src={asset(packageIndex === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={packageIndex === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="lazy" /></div>
             <span className="garden-package-label">{pkg.isPopular ? 'The crowd favourite' : pkg.liveFryBarIncluded ? 'With live frying' : 'For your inner circle'}</span>
             <h3>{pkg.name}</h3><p>{pkg.paxRange}</p><strong>RM {pkg.prices.MYR.toLocaleString()}</strong>
             <p className="garden-package-detail">{pkg.dipsCount} signature dips · {pkg.liveFryBarIncluded ? '2 on-site chefs' : 'Warm serving station'}</p>
-            <details><summary>What’s included</summary><p>{pkg.subtitle}</p><p>{pkg.mantaoCount}</p><p>{pkg.setupType}</p><ul>{[...pkg.features, ...pkg.extras].map(item => <li key={item}>{item}</li>)}</ul><p>{pkg.idealFor}</p></details>
-            <button onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
-          </article>
+            <details onPointerDown={event => event.stopPropagation()}><summary>What’s included</summary><p>{pkg.subtitle}</p><p>{pkg.mantaoCount}</p><p>{pkg.setupType}</p><ul>{[...pkg.features, ...pkg.extras].map(item => <li key={item}>{item}</li>)}</ul><p>{pkg.idealFor}</p></details>
+            <button onPointerDown={event => event.stopPropagation()} onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
+          </motion.article>
+          </AnimatePresence>
+          </div>
           <button className="garden-package-arrow garden-package-next" onClick={() => switchPackage(1)} aria-label="Next package" aria-controls="garden-current-package"><ChevronRight size={26} /></button>
           </div>
-          <p className="garden-package-position" role="status">Package {packageIndex + 1} of {WEDDING_PACKAGES.length}</p>
+          <p className="garden-package-position" role="status">{pkg.name} · {packageIndex + 1} of {WEDDING_PACKAGES.length}<span>Swipe to explore packages</span></p>
         </section>
 
         <section className="garden-dips" id="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <div className="garden-dip" key={sauce.id}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{sauce.spiceLevel} · {sauce.tags.join(' · ')}</small></span></div>)}</div></section>

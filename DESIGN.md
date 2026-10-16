@@ -6,4 +6,6 @@ The user's supplied café reference governs this alternate page: a cream canvas,
 
 Tokens are scoped under .garden-page: cream #f6f1e5, sage #b6c4ad, green #395b43, ink #263329, orange #ad491f. Fraunces headings and DM Sans body text. The typography detector flags Fraunces as common; this is a non-blocking style warning. Mobile stacks the hero and packages; desktop presents the photo alongside the heading and packages in a comparison strip.
 
-Reuse the existing enquiry and flavour dialogs. Route with a hash so static GitHub Pages hosting supports direct links. Keep original page markup and styles intact.
+The package section heading sits on the cream canvas above a layered sage card deck. Show one package at a time in RM, with horizontal drag/swipe, arrow buttons and keyboard arrows. Use directional spring transitions and immediate changes for reduced motion. Keep vertical page scrolling available during touch gestures. The enquiry uses the displayed package. Dips are inline, without a flavour popup on this route.
+
+Reuse the existing enquiry dialog. Route with a hash so static GitHub Pages hosting supports direct links. Keep original page markup and styles intact.

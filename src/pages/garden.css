@@ -17,6 +17,23 @@
 .garden-package-prev{left:0}.garden-package-next{right:0}
 .garden-package-position{text-align:center;font-size:11px;color:var(--green);margin-top:20px}
 @media(max-width:680px){.garden-package-carousel{width:90%;padding:26px 16px}.garden-package-carousel .garden-package-intro h2{font-size:30px}.garden-package-carousel .garden-package{padding:0 35px}.garden-package-carousel .garden-package h3{font-size:24px}.garden-package-arrow{width:36px;height:44px;top:223px}.garden-package-carousel .garden-package>button{padding:13px 10px}}
+/* The heading belongs to the section; only the package forms the deck. */
+.garden-package-carousel{background:transparent;box-shadow:none;padding:10px 20px 0;max-width:780px}
+.garden-package-carousel .garden-package-intro{padding:0 10px 32px}
+.garden-package-carousel .garden-package-intro h2{font-size:clamp(30px,3.4vw,43px);line-height:1.2}
+.garden-package-stage{border:0;padding:0;isolation:isolate}
+.garden-card-deck{position:relative;margin:0 14px;perspective:1000px}
+.garden-card-deck::before,.garden-card-deck::after{content:'';position:absolute;inset:0;border-radius:30px;pointer-events:none;z-index:-1;border:1px solid #8c9f80}
+.garden-card-deck::before{background:#d3ddc9;transform:translateY(18px) rotate(-3deg) scale(.97)}
+.garden-card-deck::after{background:#c3cfb9;transform:translateY(9px) rotate(2deg) scale(.99)}
+.garden-package-carousel .garden-package{max-width:none;position:relative;background:var(--sage);border:1px solid #9aaf90;border-radius:30px;padding:30px 58px;min-height:475px;box-shadow:0 12px 24px #384a3420;touch-action:pan-y;cursor:grab}
+.garden-package-carousel .garden-package:active{cursor:grabbing}
+.garden-package-image img{user-select:none;-webkit-user-drag:none}
+.garden-package-carousel .garden-package-image{margin-bottom:18px}
+.garden-package-carousel .garden-package-arrow{top:230px;z-index:3;box-shadow:0 3px 9px #384a341a}
+.garden-package-position{margin:39px 0 0;font-size:12px}
+.garden-package-position>span{display:block;margin-top:7px;font-size:11px;color:#536449}
+@media(max-width:680px){.garden-package-carousel{width:94%;padding:8px 6px 0}.garden-package-carousel .garden-package-intro{padding-bottom:28px}.garden-package-carousel .garden-package-intro h2{font-size:31px}.garden-package-carousel .garden-package{padding:27px 30px;min-height:470px}.garden-package-carousel .garden-package-arrow{width:40px;height:44px;top:225px}.garden-package-carousel .garden-package h3{font-size:25px}.garden-card-deck{margin:0 12px}.garden-package-prev{left:0}.garden-package-next{right:0}}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
