@@ -7,11 +7,17 @@ import './garden.css';
 const money = (value: number) => `RM ${value.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export function EnquiryPage() {
-  const requestedId = new URLSearchParams(window.location.hash.split('?')[1]).get('package');
+  const query = new URLSearchParams(window.location.hash.split('?')[1]);
+  const requestedId = query.get('package');
   const initialPackage = EVENT_PACKAGES.find(item => item.id === requestedId) ?? EVENT_PACKAGES[0];
   const [packageId, setPackageId] = useState(initialPackage.id);
   const pkg = EVENT_PACKAGES.find(item => item.id === packageId) ?? initialPackage;
-  const [guests, setGuests] = useState(initialPackage.exampleGuests ?? initialPackage.minPax);
+  const [guests, setGuests] = useState(() => {
+    const requestedGuests = Number(query.get('guests'));
+    return query.has('guests') && Number.isInteger(requestedGuests)
+      ? Math.max(initialPackage.minPax, Math.min(initialPackage.maxPax, requestedGuests))
+      : initialPackage.exampleGuests ?? initialPackage.minPax;
+  });
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');

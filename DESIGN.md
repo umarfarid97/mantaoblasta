@@ -6,7 +6,7 @@ The user's supplied café reference governs this alternate page: a cream canvas,
 
 Tokens are scoped under .garden-page: cream #f6f1e5, sage #b6c4ad, green #395b43, ink #263329, orange #ad491f. Fraunces headings and DM Sans body text. The typography detector flags Fraunces as common; this is a non-blocking style warning. Mobile stacks the hero and packages; desktop presents the photo alongside the heading and packages in a comparison strip.
 
-The package section heading sits on the cream canvas above a layered sage card deck. Show one package at a time in RM, with horizontal drag/swipe, arrow buttons and keyboard arrows. Use directional spring transitions and immediate changes for reduced motion. Keep vertical page scrolling available during touch gestures. The enquiry uses the displayed package. Dips are inline, without a flavour popup on this route.
+The package section heading sits above one fixed sage tile. Swipe only the package name, or use adjacent arrow buttons and keyboard arrows. The tile stays still while its details change. A native guest slider respects the active tier's minimum and maximum and updates the RM total immediately. Remember guest counts per package while mounted, and carry the selected package and count to the enquiry URL. Dips are inline, without a flavour popup on this route.
 
 Package cards are compact, with no pictures or expandable details. The six cards cover three tiers each for Golden Mantao and Mantao ButterClam, using src/data/eventPackages.ts. Show the guest range, rate per guest, short inclusions and an explicitly labelled example total. Enquiry totals calculate from actual guest count. Keep the original homepage's legacy package data separate.
 

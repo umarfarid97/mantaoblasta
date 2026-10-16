@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
 import { SIGNATURE_SAUCES } from '../data/packagesData';
 import { EVENT_PACKAGES } from '../data/eventPackages';
@@ -25,12 +25,12 @@ export function GardenPage() {
     };
   }, []);
   const [packageIndex, setPackageIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const reducedMotion = useReducedMotion();
+  const [guestCounts, setGuestCounts] = useState<Record<string, number>>({});
   const pkg = EVENT_PACKAGES[packageIndex];
-  const enquire = (chosenPackage = pkg) => { window.location.hash = `/garden/enquiry?package=${encodeURIComponent(chosenPackage.id)}`; };
+  const guests = guestCounts[pkg.id] ?? pkg.minPax;
+  const total = Math.round(guests * (pkg.pricePerGuestMYR ?? 0) * 100) / 100;
+  const enquire = (chosenPackage = pkg) => { window.location.hash = `/garden/enquiry?package=${encodeURIComponent(chosenPackage.id)}&guests=${guestCounts[chosenPackage.id] ?? chosenPackage.minPax}`; };
   const switchPackage = (step: number) => {
-    setDirection(step);
     setPackageIndex(index => (index + step + EVENT_PACKAGES.length) % EVENT_PACKAGES.length);
   };
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
@@ -60,9 +60,10 @@ export function GardenPage() {
           {[{ Icon: Flame, title: 'That golden crunch', text: 'Crispy little pillows with an ultra-fluffy centre.' }, { Icon: Utensils, title: 'A dip for every mood', text: 'From buttermilk salted egg to sweet pandan custard.' }, { Icon: ChefHat, title: 'Ready for your event', text: 'Warm catering setups and live frying options.' }, { Icon: Users, title: 'Better together', text: 'For intimate gatherings and grand celebrations.' }].map(({ Icon, title, text }) => <div key={title}><Icon /><h2>{title}</h2><p>{text}</p></div>)}
         </section>
 
-        <section className="garden-packages garden-package-carousel" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title" aria-roledescription="carousel">
+        <section className="garden-packages garden-package-carousel garden-package-calculator" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title">
           <div className="garden-package-intro"><h2 id="garden-packages-title">A gathering. A celebration.<br /><em>A little Blasta.</em></h2><p>Find a package for your people.<br />We’ll bring the golden goodness.</p></div>
-          <div className="garden-package-stage" tabIndex={0} aria-label="Package cards. Swipe or use left and right arrow keys to change package." onKeyDown={event => {
+          <article className="garden-package" id="garden-current-package">
+          <div className="garden-package-picker" tabIndex={0} aria-label="Swipe package name or use arrow keys to switch package" onKeyDown={event => {
             if (event.target !== event.currentTarget) return;
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
               event.preventDefault();
@@ -70,31 +71,27 @@ export function GardenPage() {
             }
           }}>
           <button className="garden-package-arrow garden-package-prev" onClick={() => switchPackage(-1)} aria-label="Previous package" aria-controls="garden-current-package"><ChevronLeft size={26} /></button>
-          <div className="garden-card-deck">
-          <AnimatePresence initial={false} mode="sync" custom={direction}>
-          <motion.article className="garden-package" id="garden-current-package" key={pkg.id}
-            custom={direction}
-            variants={{
-              enter: { x: 0, opacity: 1, rotate: 0, scale: 1, zIndex: 1 },
-              active: { x: 0, opacity: 1, rotate: 0, scale: 1, zIndex: 1 },
-              exit: (step: number) => ({ x: reducedMotion ? 0 : (step > 0 ? '-110%' : '110%'), opacity: 1, rotate: reducedMotion ? 0 : step * -5, scale: 1, zIndex: 2, pointerEvents: 'none' as const }),
-            }} initial="enter" animate="active" exit="exit"
-            transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 340, damping: 32, mass: .8 }}
+          <motion.h3 key={pkg.id} aria-live="polite"
             drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={.55} dragSnapToOrigin
             onDragEnd={(_, info) => {
               if (Math.abs(info.offset.x) > 55 || Math.abs(info.velocity.x) > 450) switchPackage(info.offset.x === 0 ? (info.velocity.x < 0 ? 1 : -1) : (info.offset.x < 0 ? 1 : -1));
             }}>
-            <h3>{pkg.name}</h3><p>{pkg.paxRange}</p>
-            <strong>RM {pkg.pricePerGuestMYR?.toFixed(2)}<span className="garden-per-guest"> / guest</span></strong>
-            <ul className="garden-package-inclusions">{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul>
-            <p className="garden-package-example">Example: {pkg.exampleGuests?.toLocaleString()} guests · <b>RM {pkg.prices.MYR.toLocaleString()}</b></p>
-            <button onPointerDown={event => event.stopPropagation()} onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
-          </motion.article>
-          </AnimatePresence>
-          </div>
+            {pkg.name}
+          </motion.h3>
           <button className="garden-package-arrow garden-package-next" onClick={() => switchPackage(1)} aria-label="Next package" aria-controls="garden-current-package"><ChevronRight size={26} /></button>
           </div>
-          <p className="garden-package-position" role="status">{pkg.name} · {packageIndex + 1} of {EVENT_PACKAGES.length}<span>Swipe to explore packages</span></p>
+            <p>{pkg.paxRange}</p>
+            <strong>RM {pkg.pricePerGuestMYR?.toFixed(2)}<span className="garden-per-guest"> / guest</span></strong>
+            <ul className="garden-package-inclusions">{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul>
+            <div className="garden-pax-control">
+              <label htmlFor="garden-pax">Your guest count <output htmlFor="garden-pax">{guests.toLocaleString()} pax</output></label>
+              <input id="garden-pax" type="range" min={pkg.minPax} max={pkg.maxPax} step={1} value={guests} onChange={event => setGuestCounts(previous => ({ ...previous, [pkg.id]: Number(event.target.value) }))} aria-valuetext={`${guests} guests`} />
+              <div className="garden-pax-bounds"><span>{pkg.minPax.toLocaleString()} pax</span><span>{pkg.maxPax.toLocaleString()} pax</span></div>
+            </div>
+            <div className="garden-tile-total" aria-live="polite"><span>Estimated total</span><strong>RM {total.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong><small>{guests.toLocaleString()} guests × RM {pkg.pricePerGuestMYR?.toFixed(2)}</small></div>
+            <button onPointerDown={event => event.stopPropagation()} onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
+          </article>
+          <p className="garden-package-position" role="status">Package {packageIndex + 1} of {EVENT_PACKAGES.length}<span>Swipe the package name to explore</span></p>
         </section>
 
         <section className="garden-dips" id="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <div className="garden-dip" key={sauce.id}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{[sauce.spiceLevel, ...sauce.tags].join(' · ')}</small></span></div>)}</div></section>

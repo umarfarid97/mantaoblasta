@@ -86,6 +86,21 @@
 @media(max-width:740px){.garden-enquiry-main{padding:32px 6% 35px}.garden-enquiry-layout{grid-template-columns:minmax(0,1fr);gap:24px}.garden-enquiry-summary{position:static;padding:24px}.garden-form-row{grid-template-columns:minmax(0,1fr)}.garden-enquiry-page .garden-header{flex-wrap:nowrap}.garden-enquiry-page .garden-back-link{font-size:12px}.garden-enquiry-page .garden-brand span{display:none}.garden-enquiry-intro{margin-bottom:30px}}
 .garden-brand img{width:160px;height:70px}
 @media(max-width:680px){.garden-brand img{width:135px;height:60px}}
+.garden-package-calculator .garden-package{cursor:default;min-height:540px;padding:24px 32px;box-shadow:none}
+.garden-package-calculator .garden-package:active{cursor:default}
+.garden-package-picker{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:10px;width:100%;min-height:90px;overflow:hidden}
+.garden-package-calculator .garden-package-picker h3{margin:0;font-size:28px;line-height:1.25;cursor:grab;touch-action:pan-y;user-select:none}
+.garden-package-calculator .garden-package-picker h3:active{cursor:grabbing}
+.garden-package-calculator .garden-package-picker .garden-package-arrow{position:static;margin:0;width:44px;height:44px;box-shadow:none}
+.garden-package-calculator .garden-package-inclusions{min-height:56px;margin:8px 0;display:flex;flex-direction:column;justify-content:center}
+.garden-pax-control{width:100%;max-width:440px;margin:12px 0}
+.garden-pax-control label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:600}
+.garden-pax-control output{font-size:16px;font-variant-numeric:tabular-nums;background:#edf0e3;color:var(--green);border-radius:8px;padding:7px 12px}
+.garden-pax-control input{display:block;width:100%;height:44px;margin:5px 0;accent-color:var(--green);cursor:ew-resize}
+.garden-pax-bounds{display:flex;justify-content:space-between;font-size:11px;color:#40583b}
+.garden-tile-total{display:grid;gap:7px;margin:16px 0 20px;font-variant-numeric:tabular-nums}
+.garden-tile-total>span{font-size:12px}.garden-tile-total>strong{font-size:30px;font-weight:600}.garden-tile-total>small{font-size:12px;color:#40583b}
+@media(max-width:680px){.garden-package-calculator .garden-package{padding:20px 14px;min-height:550px}.garden-package-picker{gap:5px;min-height:96px}.garden-package-calculator .garden-package-picker h3{font-size:23px}.garden-pax-control{padding:0 9px}.garden-package-calculator .garden-package-inclusions{min-height:63px;padding:0 10px}}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
