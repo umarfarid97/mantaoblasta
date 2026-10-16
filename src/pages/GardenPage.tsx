@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowUpRight, ChefHat, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
 import { WEDDING_PACKAGES, SIGNATURE_SAUCES } from '../data/packagesData';
-import type { Currency, WeddingPackage } from '../types';
+import type { WeddingPackage } from '../types';
 import { EnquiryModal } from '../components/EnquiryModal';
 import './garden.css';
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
-const currencyLabels = { MYR: 'RM', SGD: 'S$', USD: '$' };
 const currentYear = new Date().getFullYear();
 
 export function GardenPage() {
@@ -24,10 +23,12 @@ export function GardenPage() {
       else theme.remove();
     };
   }, []);
-  const [currency, setCurrency] = useState<Currency>('MYR');
+  const [packageIndex, setPackageIndex] = useState(0);
+  const pkg = WEDDING_PACKAGES[packageIndex];
   const [selected, setSelected] = useState<WeddingPackage>(WEDDING_PACKAGES[1]);
   const [enquiry, setEnquiry] = useState(false);
-  const enquire = (pkg = selected) => { setSelected(pkg); setEnquiry(true); };
+  const enquire = (chosenPackage = pkg) => { setSelected(chosenPackage); setEnquiry(true); };
+  const switchPackage = (direction: number) => setPackageIndex(index => (index + direction + WEDDING_PACKAGES.length) % WEDDING_PACKAGES.length);
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 
   return <div className="garden-page">
@@ -55,16 +56,21 @@ export function GardenPage() {
           {[{ Icon: Flame, title: 'That golden crunch', text: 'Crispy little pillows with an ultra-fluffy centre.' }, { Icon: Utensils, title: 'A dip for every mood', text: 'From buttermilk salted egg to sweet pandan custard.' }, { Icon: ChefHat, title: 'Ready for your event', text: 'Warm catering setups and live frying options.' }, { Icon: Users, title: 'Better together', text: 'For intimate gatherings and grand celebrations.' }].map(({ Icon, title, text }) => <div key={title}><Icon /><h2>{title}</h2><p>{text}</p></div>)}
         </section>
 
-        <section className="garden-packages" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title">
-          <div className="garden-package-intro"><h2 id="garden-packages-title">A gathering.<br />A celebration.<br /><em>A little Blasta.</em></h2><p>Find a package for your people.<br />We’ll bring the golden goodness.</p><label className="garden-currency">Show prices in <select value={currency} onChange={e => setCurrency(e.target.value as Currency)} aria-label="Price currency"><option value="MYR">MYR</option><option value="SGD">SGD</option><option value="USD">USD</option></select></label></div>
-          {WEDDING_PACKAGES.map((pkg, i) => <article className="garden-package" key={pkg.id}>
-            <div className={`garden-package-image garden-crop-${i}`}><img src={asset(i === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={i === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="lazy" /></div>
+        <section className="garden-packages garden-package-carousel" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title" aria-roledescription="carousel">
+          <div className="garden-package-intro"><h2 id="garden-packages-title">A gathering. A celebration.<br /><em>A little Blasta.</em></h2><p>Find a package for your people.<br />We’ll bring the golden goodness.</p></div>
+          <div className="garden-package-stage">
+          <button className="garden-package-arrow garden-package-prev" onClick={() => switchPackage(-1)} aria-label="Previous package" aria-controls="garden-current-package"><ChevronLeft size={26} /></button>
+          <article className="garden-package" id="garden-current-package" key={pkg.id} aria-live="polite" aria-atomic="true">
+            <div className={`garden-package-image garden-crop-${packageIndex}`}><img src={asset(packageIndex === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={packageIndex === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="lazy" /></div>
             <span className="garden-package-label">{pkg.isPopular ? 'The crowd favourite' : pkg.liveFryBarIncluded ? 'With live frying' : 'For your inner circle'}</span>
-            <h3>{pkg.name}</h3><p>{pkg.paxRange}</p><strong>{currencyLabels[currency]} {pkg.prices[currency].toLocaleString()}</strong>
+            <h3>{pkg.name}</h3><p>{pkg.paxRange}</p><strong>RM {pkg.prices.MYR.toLocaleString()}</strong>
             <p className="garden-package-detail">{pkg.dipsCount} signature dips · {pkg.liveFryBarIncluded ? '2 on-site chefs' : 'Warm serving station'}</p>
             <details><summary>What’s included</summary><p>{pkg.subtitle}</p><p>{pkg.mantaoCount}</p><p>{pkg.setupType}</p><ul>{[...pkg.features, ...pkg.extras].map(item => <li key={item}>{item}</li>)}</ul><p>{pkg.idealFor}</p></details>
             <button onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
-          </article>)}
+          </article>
+          <button className="garden-package-arrow garden-package-next" onClick={() => switchPackage(1)} aria-label="Next package" aria-controls="garden-current-package"><ChevronRight size={26} /></button>
+          </div>
+          <p className="garden-package-position" role="status">Package {packageIndex + 1} of {WEDDING_PACKAGES.length}</p>
         </section>
 
         <section className="garden-dips" id="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <div className="garden-dip" key={sauce.id}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{sauce.spiceLevel} · {sauce.tags.join(' · ')}</small></span></div>)}</div></section>
@@ -75,6 +81,6 @@ export function GardenPage() {
       </main>
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span><a href="#/">View original website <ArrowUpRight size={14} /></a></footer>
     </div>
-    <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency={currency} onSelectAnotherPackage={setSelected} />
+    <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency="MYR" onSelectAnotherPackage={setSelected} />
   </div>;
 }
