@@ -27,6 +27,10 @@ export function EnquiryPage() {
   const [opened, setOpened] = useState(false);
   const total = Math.round(guests * (pkg.pricePerGuestMYR ?? 0) * 100) / 100;
   const validGuests = Number.isSafeInteger(guests) && guests >= pkg.minPax && (pkg.openEndedGuests || guests <= pkg.maxPax);
+  const enforceGuestRange = () => {
+    const wholeGuests = Number.isFinite(guests) ? Math.trunc(guests) : pkg.minPax;
+    setGuests(Math.max(pkg.minPax, pkg.openEndedGuests ? wholeGuests : Math.min(pkg.maxPax, wholeGuests)));
+  };
   const [today] = useState(() => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kuala_Lumpur', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()));
 
   useEffect(() => {
@@ -64,7 +68,7 @@ export function EnquiryPage() {
         <div className="garden-enquiry-fields">
           <section aria-labelledby="enquiry-event"><h2 id="enquiry-event">Your event</h2>
             <label>Choose your package<select value={packageId} onChange={event => { const next = EVENT_PACKAGES.find(item => item.id === event.target.value)!; setPackageId(next.id); setGuests(current => Math.max(next.minPax, next.openEndedGuests ? current : Math.min(next.maxPax, current))); setOpened(false); }}>{EVENT_PACKAGES.map(item => <option key={item.id} value={item.id}>{item.name} — {money(item.pricePerGuestMYR ?? 0)} / guest</option>)}</select></label>
-            <div className="garden-form-row"><label>Number of guests <span>(required)</span><input type="number" min={pkg.minPax} max={pkg.openEndedGuests ? undefined : pkg.maxPax} step="1" required value={guests || ''} onChange={event => setGuests(Number(event.target.value))} aria-describedby="enquiry-guest-range" /><small id="enquiry-guest-range">{pkg.paxRange} for this tier{pkg.openEndedGuests ? ' · Counts above 1,000 welcome' : ''}</small></label><label>Event date <span>(required)</span><input type="date" min={today} required value={date} onChange={event => setDate(event.target.value)} /></label></div>
+            <div className="garden-form-row"><label>Number of guests <span>(required)</span><input type="number" min={pkg.minPax} max={pkg.openEndedGuests ? undefined : pkg.maxPax} step="1" required value={guests || ''} onChange={event => setGuests(Number(event.target.value))} onBlur={enforceGuestRange} aria-invalid={!validGuests} aria-describedby="enquiry-guest-range" /><small id="enquiry-guest-range">{pkg.openEndedGuests ? `Minimum ${pkg.minPax} guests · No maximum` : `${pkg.minPax}–${pkg.maxPax} guests only`}</small></label><label>Event date <span>(required)</span><input type="date" min={today} required value={date} onChange={event => setDate(event.target.value)} /></label></div>
             <label>Event type<select value={eventType} onChange={event => setEventType(event.target.value)}>{['Corporate event', 'Private gathering', 'Birthday party', 'Wedding / Sanding', 'Exhibition / Festival', 'Annual dinner', 'Other celebration'].map(item => <option key={item}>{item}</option>)}</select></label>
             <label>Venue / location <span>(optional)</span><input autoComplete="street-address" value={venue} onChange={event => setVenue(event.target.value)} placeholder="Hotel, office, hall or outdoor venue" /></label>
           </section>
