@@ -40,17 +40,7 @@ export const Footer: React.FC<FooterProps> = () => {
               paired with signature creamy buttermilk dip for corporate functions, private gatherings & celebrations.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-2 text-xs text-amber-200">
-              <span className="px-2.5 py-1 rounded bg-black/40 border border-white/10">
-                100% Halal Ingredients
-              </span>
-              <span className="px-2.5 py-1 rounded bg-black/40 border border-white/10">
-                Live Deep Frying Booth
-              </span>
-              <span className="px-2.5 py-1 rounded bg-black/40 border border-white/10">
-                Chafing Food Warmers
-              </span>
-            </div>
+
           </div>
 
           {/* Contact (Right Column) */}
