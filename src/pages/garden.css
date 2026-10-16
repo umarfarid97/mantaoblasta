@@ -22,7 +22,8 @@
 .garden-package-carousel .garden-package-intro{padding:0 10px 32px}
 .garden-package-carousel .garden-package-intro h2{font-size:clamp(30px,3.4vw,43px);line-height:1.2}
 .garden-package-stage{border:0;padding:0;isolation:isolate}
-.garden-card-deck{position:relative;margin:0 14px;perspective:1000px}
+.garden-card-deck{position:relative;display:grid;margin:0 14px;perspective:1000px}
+.garden-card-deck>.garden-package{grid-area:1 / 1;width:100%;align-self:start}
 .garden-card-deck::before,.garden-card-deck::after{content:'';position:absolute;inset:0;border-radius:30px;pointer-events:none;z-index:-1;border:1px solid #8c9f80}
 .garden-card-deck::before{background:#d3ddc9;transform:translateY(18px) rotate(-3deg) scale(.97)}
 .garden-card-deck::after{background:#c3cfb9;transform:translateY(9px) rotate(2deg) scale(.99)}

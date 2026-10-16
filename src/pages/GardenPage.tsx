@@ -73,20 +73,20 @@ export function GardenPage() {
           }}>
           <button className="garden-package-arrow garden-package-prev" onClick={() => switchPackage(-1)} aria-label="Previous package" aria-controls="garden-current-package"><ChevronLeft size={26} /></button>
           <div className="garden-card-deck">
-          <AnimatePresence initial={false} mode="wait" custom={direction}>
+          <AnimatePresence initial={false} mode="sync" custom={direction}>
           <motion.article className="garden-package" id="garden-current-package" key={pkg.id}
             custom={direction}
             variants={{
-              enter: (step: number) => ({ x: reducedMotion ? 0 : step * 90, opacity: reducedMotion ? 1 : 0, rotate: reducedMotion ? 0 : step * 3, scale: reducedMotion ? 1 : .96 }),
-              active: { x: 0, opacity: 1, rotate: 0, scale: 1 },
-              exit: (step: number) => ({ x: reducedMotion ? 0 : step * -150, opacity: reducedMotion ? 1 : 0, rotate: reducedMotion ? 0 : step * -5, scale: reducedMotion ? 1 : .96 }),
+              enter: { x: 0, opacity: 1, rotate: 0, scale: 1, zIndex: 1 },
+              active: { x: 0, opacity: 1, rotate: 0, scale: 1, zIndex: 1 },
+              exit: (step: number) => ({ x: reducedMotion ? 0 : (step > 0 ? '-110%' : '110%'), opacity: 1, rotate: reducedMotion ? 0 : step * -5, scale: 1, zIndex: 2, pointerEvents: 'none' as const }),
             }} initial="enter" animate="active" exit="exit"
             transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 340, damping: 32, mass: .8 }}
             drag="x" dragConstraints={{ left: 0, right: 0 }} dragElastic={.55} dragSnapToOrigin
             onDragEnd={(_, info) => {
               if (Math.abs(info.offset.x) > 55 || Math.abs(info.velocity.x) > 450) switchPackage(info.offset.x === 0 ? (info.velocity.x < 0 ? 1 : -1) : (info.offset.x < 0 ? 1 : -1));
             }}>
-            <div className={`garden-package-image garden-crop-${packageIndex}`}><img src={asset(packageIndex === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={packageIndex === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="lazy" /></div>
+            <div className={`garden-package-image garden-crop-${packageIndex}`}><img src={asset(packageIndex === 1 ? 'mantao-box.png' : 'mantao-plate.jpg')} alt={packageIndex === 1 ? 'Box of golden mantao with dipping sauce' : 'Golden mantao platter'} loading="eager" /></div>
             <span className="garden-package-label">{pkg.isPopular ? 'The crowd favourite' : pkg.liveFryBarIncluded ? 'With live frying' : 'For your inner circle'}</span>
             <h3>{pkg.name}</h3><p>{pkg.paxRange}</p><strong>RM {pkg.prices.MYR.toLocaleString()}</strong>
             <p className="garden-package-detail">{pkg.dipsCount} signature dips · {pkg.liveFryBarIncluded ? '2 on-site chefs' : 'Warm serving station'}</p>
