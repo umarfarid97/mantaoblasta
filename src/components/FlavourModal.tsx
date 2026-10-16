@@ -98,7 +98,7 @@ export const FlavourModal: React.FC<FlavourModalProps> = ({ isOpen, onClose }) =
             />
             <div className="flex-1 space-y-1">
               <p className="font-heading font-bold text-sm text-[#C4272F] uppercase">
-                Featured: Creamy Buttermilk Sauce & Golden Mantao Platter
+                Featured: Buttermilk Salted Egg & Golden Mantao Platter
               </p>
               <p className="text-[#573E30] leading-snug">
                 Served in generous portions for event cocktail hours, corporate functions, and guest grazing tables. 

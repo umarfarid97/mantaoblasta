@@ -161,8 +161,8 @@ const PACKAGE_DELIVERABLES: Record<string, FeatureItem[]> = {
       detail: 'Crispy golden exterior with pillow-soft interior, portioned for 3 pieces per guest for cocktail or tea hour.',
     },
     {
-      title: '2 Signature Dips (Buttermilk & Sweet Glaze)',
-      detail: 'Includes our viral Creamy Spiced Buttermilk Dip crafted with butter & curry leaves, plus Sweet Pandan Condensed Milk.',
+      title: '2 Signature Dips',
+      detail: 'Choose 2 dips from Buttermilk Salted Egg, Vanilla Cinnamon, Pandan Custard, and Milk Chocolate.',
     },
   ],
   'gold-celebration': [
@@ -172,7 +172,7 @@ const PACKAGE_DELIVERABLES: Record<string, FeatureItem[]> = {
     },
     {
       title: '3 Signature Dips with Free Refills',
-      detail: 'Creamy Spiced Buttermilk, Golden Salted Egg Butter, and Sweet Glaze served in dedicated dipping dispensers with unlimited sauce refills.',
+      detail: 'Choose 3 dips from Buttermilk Salted Egg, Vanilla Cinnamon, Pandan Custard, and Milk Chocolate, with unlimited sauce refills.',
     },
   ],
   'platinum-grand': [
@@ -182,7 +182,7 @@ const PACKAGE_DELIVERABLES: Record<string, FeatureItem[]> = {
     },
     {
       title: 'All 4 Signature Dips with Heated Dispensers',
-      detail: 'Full flight of dips: Buttermilk, Salted Egg, Pandan Glaze, and Sweet Sambal in specialized heated pump dispensers.',
+      detail: 'All 4 dips: Buttermilk Salted Egg, Vanilla Cinnamon, Pandan Custard, and Milk Chocolate in dedicated sauce dispensers.',
     },
   ],
 };

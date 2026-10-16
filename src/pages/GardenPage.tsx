@@ -54,7 +54,7 @@ export function GardenPage() {
         </section>
 
         <section className="garden-values" aria-label="The Blasta experience">
-          {[{ Icon: Flame, title: 'That golden crunch', text: 'Crispy little pillows with an ultra-fluffy centre.' }, { Icon: Utensils, title: 'A dip for every mood', text: 'From creamy buttermilk to sweet pandan.' }, { Icon: ChefHat, title: 'Ready for your event', text: 'Warm catering setups and live frying options.' }, { Icon: Users, title: 'Better together', text: 'For intimate gatherings and grand celebrations.' }].map(({ Icon, title, text }) => <div key={title}><Icon /><h2>{title}</h2><p>{text}</p></div>)}
+          {[{ Icon: Flame, title: 'That golden crunch', text: 'Crispy little pillows with an ultra-fluffy centre.' }, { Icon: Utensils, title: 'A dip for every mood', text: 'From buttermilk salted egg to sweet pandan custard.' }, { Icon: ChefHat, title: 'Ready for your event', text: 'Warm catering setups and live frying options.' }, { Icon: Users, title: 'Better together', text: 'For intimate gatherings and grand celebrations.' }].map(({ Icon, title, text }) => <div key={title}><Icon /><h2>{title}</h2><p>{text}</p></div>)}
         </section>
 
         <section className="garden-packages" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title">

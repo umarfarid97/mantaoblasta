@@ -45,12 +45,7 @@ export const formatToYYYYMMDD = (ddmmyyyy: string): string => {
 };
 
 const getDefaultDips = (count: number): string[] => {
-  const defaults = [
-    'creamy-buttermilk',
-    'sweet-condensed-pandan',
-    'salted-egg-butter',
-    'sarawak-black-pepper',
-  ];
+  const defaults = SIGNATURE_SAUCES.map((sauce) => sauce.id);
   return defaults.slice(0, count);
 };
 
