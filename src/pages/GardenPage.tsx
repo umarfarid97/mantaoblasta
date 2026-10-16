@@ -3,8 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
 import { SIGNATURE_SAUCES } from '../data/packagesData';
 import { EVENT_PACKAGES } from '../data/eventPackages';
-import type { WeddingPackage } from '../types';
-import { EnquiryModal } from '../components/EnquiryModal';
 import { EventSlideshow } from '../components/EventSlideshow';
 import './garden.css';
 
@@ -30,9 +28,7 @@ export function GardenPage() {
   const [direction, setDirection] = useState(1);
   const reducedMotion = useReducedMotion();
   const pkg = EVENT_PACKAGES[packageIndex];
-  const [selected, setSelected] = useState<WeddingPackage>(EVENT_PACKAGES[0]);
-  const [enquiry, setEnquiry] = useState(false);
-  const enquire = (chosenPackage = pkg) => { setSelected(chosenPackage); setEnquiry(true); };
+  const enquire = (chosenPackage = pkg) => { window.location.hash = `/garden/enquiry?package=${encodeURIComponent(chosenPackage.id)}`; };
   const switchPackage = (step: number) => {
     setDirection(step);
     setPackageIndex(index => (index + step + EVENT_PACKAGES.length) % EVENT_PACKAGES.length);
@@ -109,6 +105,5 @@ export function GardenPage() {
       </main>
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span><a href="#/">View original website <ArrowUpRight size={14} /></a></footer>
     </div>
-    <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency="MYR" onSelectAnotherPackage={setSelected} packages={EVENT_PACKAGES} />
   </div>;
 }

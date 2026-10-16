@@ -10,4 +10,4 @@ The package section heading sits on the cream canvas above a layered sage card d
 
 Package cards are compact, with no pictures or expandable details. The six cards cover three tiers each for Golden Mantao and Mantao ButterClam, using src/data/eventPackages.ts. Show the guest range, rate per guest, short inclusions and an explicitly labelled example total. Enquiry totals calculate from actual guest count. Keep the original homepage's legacy package data separate.
 
-Reuse the existing enquiry dialog. Route with a hash so static GitHub Pages hosting supports direct links. Keep original page markup and styles intact.
+The garden enquiry lives at #/garden/enquiry?package=<id>, with cream fields, sage summary and orange WhatsApp action. Carry the selected package in the URL; offer all six menus in a compact selector. Show required event/contact fields, optional venue/notes, live totals and native validation. It opens a WhatsApp draft for the visitor to review and send. Keep the original homepage's legacy modal unchanged. Hash routing supports static GitHub Pages direct links.

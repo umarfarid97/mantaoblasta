@@ -56,6 +56,34 @@
 .garden-gallery-controls span{font-size:12px;font-variant-numeric:tabular-nums;min-width:42px;text-align:center}
 .garden-gallery-controls button svg{color:inherit}
 .garden-story .garden-gallery-hint{margin:0;padding:0;max-width:none;text-align:left;font-size:11px;color:#e2e9d9;white-space:nowrap;flex:1}
+.garden-back-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:13px;padding:12px 0}
+.garden-enquiry-main{max-width:1100px;margin:auto;padding:48px 5% 60px}
+.garden-enquiry-intro{margin-bottom:36px;max-width:620px}
+.garden-enquiry-intro h1{font-size:clamp(36px,4.5vw,55px);line-height:1.1;letter-spacing:-.025em;margin-bottom:18px}
+.garden-enquiry-intro p{font-size:14px;line-height:1.8;color:#4b5847}
+.garden-enquiry-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,1fr);gap:38px;align-items:start}
+.garden-enquiry-fields section+section{margin-top:30px;padding-top:30px;border-top:1px solid #cbd1be}
+.garden-enquiry-fields h2{font-size:25px;margin-bottom:22px}
+.garden-enquiry-fields label{display:block;font-size:13px;font-weight:600;margin-bottom:20px;color:var(--ink)}
+.garden-enquiry-fields label>span{font-weight:400;font-size:11px;color:#52634a}
+.garden-enquiry-fields input,.garden-enquiry-fields select,.garden-enquiry-fields textarea{display:block;width:100%;min-width:0;max-width:100%;margin-top:8px;padding:13px 14px;border:1px solid #a5b399;border-radius:11px;background:#fffdf6;color:var(--ink);font-family:inherit;font-size:16px;line-height:1.5;caret-color:var(--green)}
+.garden-enquiry-fields select{white-space:normal;text-overflow:ellipsis;padding-right:25px}
+.garden-enquiry-fields textarea{resize:vertical}
+.garden-enquiry-fields input::placeholder,.garden-enquiry-fields textarea::placeholder{color:#65705b}
+.garden-enquiry-fields small{display:block;margin-top:7px;font-size:11px;font-weight:400;color:#52634a}
+.garden-form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.garden-enquiry-summary{position:sticky;top:24px;background:#d4ddc9;border-radius:25px;padding:28px;min-width:0}
+.garden-enquiry-summary h2{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;margin-bottom:14px}
+.garden-enquiry-summary h3{font-size:27px;line-height:1.25;margin-bottom:10px}
+.garden-enquiry-summary>p{font-size:12px;line-height:1.7}
+.garden-enquiry-summary ul{list-style:disc;padding:20px 0 20px 17px;font-size:12px;line-height:1.8}
+.garden-enquiry-summary li+li{margin-top:7px}
+.garden-enquiry-total{padding:22px 0;border-top:1px solid #aab99d;display:grid;gap:8px}
+.garden-enquiry-total>span{font-size:12px}.garden-enquiry-total strong{font-size:32px;font-weight:600;font-variant-numeric:tabular-nums}.garden-enquiry-total small{font-size:12px;color:#475d41}
+.garden-enquiry-summary .garden-button{width:100%;padding:15px 10px;gap:7px;font-size:12px}
+.garden-enquiry-summary .garden-enquiry-note{margin-top:15px;font-size:11px;color:#475d41}
+.garden-enquiry-feedback{margin-top:15px;padding-top:15px;border-top:1px solid #aab99d}
+@media(max-width:740px){.garden-enquiry-main{padding:32px 6% 35px}.garden-enquiry-layout{grid-template-columns:minmax(0,1fr);gap:24px}.garden-enquiry-summary{position:static;padding:24px}.garden-form-row{grid-template-columns:minmax(0,1fr)}.garden-enquiry-page .garden-header{flex-wrap:nowrap}.garden-enquiry-page .garden-back-link{font-size:12px}.garden-enquiry-page .garden-brand span{display:none}.garden-enquiry-intro{margin-bottom:30px}}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
