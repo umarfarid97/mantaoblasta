@@ -57,7 +57,7 @@ export function EnquiryPage() {
   };
 
   return <div className="garden-page garden-enquiry-page"><div className="garden-sheet">
-    <header className="garden-header"><a href="#/garden" className="garden-brand"><img src={`${import.meta.env.BASE_URL}blasta-logo-dark.png`} alt="blasta EMPIRE" /></a><a className="garden-back-link" href="#/garden"><ArrowLeft size={17} /> Back to website</a></header>
+    <header className="garden-header"><a href="./" className="garden-brand"><img src={`${import.meta.env.BASE_URL}blasta-logo-dark.png`} alt="blasta EMPIRE" /></a><a className="garden-back-link" href="./"><ArrowLeft size={17} /> Back to website</a></header>
     <main className="garden-enquiry-main">
       <div className="garden-enquiry-intro"><h1>Let’s plan your event.</h1><p>A few details, a little Blasta. Tell us what you have in mind and we’ll check availability on WhatsApp.</p></div>
       <form className="garden-enquiry-layout" onSubmit={submit}>
@@ -76,6 +76,6 @@ export function EnquiryPage() {
         </div>
         <aside className="garden-enquiry-summary" aria-labelledby="enquiry-summary"><h2 id="enquiry-summary">Your package</h2><h3>{pkg.name}</h3><p>{pkg.paxRange}</p><ul>{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul><div className="garden-enquiry-total" aria-live="polite"><span>Estimated total</span><strong>{validGuests ? money(total) : '—'}</strong><small>{validGuests ? `${guests.toLocaleString()} guests × ${money(pkg.pricePerGuestMYR ?? 0)}` : `Enter ${pkg.minPax}–${pkg.maxPax.toLocaleString()} guests`}</small></div><button className="garden-button" type="submit"><MessageCircle size={18} /> Continue on WhatsApp <ArrowUpRight size={16} /></button><p className="garden-enquiry-note">Review and send your enquiry in WhatsApp. Availability will be confirmed by our team.</p>{opened && <p className="garden-enquiry-feedback" role="status">Your WhatsApp draft is ready. If it didn’t open, allow pop-ups and try again.</p>}</aside>
       </form>
-    </main><footer className="garden-footer"><a href="#/garden"><ArrowLeft size={14} /> Back to Blasta</a><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer">+60 18-286 8402</a></footer>
+    </main><footer className="garden-footer"><a href="./"><ArrowLeft size={14} /> Back to Blasta</a><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer">+60 18-286 8402</a></footer>
   </div></div>;
 }

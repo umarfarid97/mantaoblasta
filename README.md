@@ -1,52 +1,27 @@
-# mantaoblasta
+# Blasta Empire
 
-> Premium Malaysian Golden Fried Mantao Event & Wedding Catering Packages.
+Malaysian Golden Mantao and Mantao ButterClam event catering.
 
-🌐 **Live Website**: [https://umarfarid97.github.io/mantaoblasta/](https://umarfarid97.github.io/mantaoblasta/)
+Live website: [blastaempire.com](https://blastaempire.com/)
 
-## Overview
+The cream and sage design is the main website. The previous design has been removed.
 
-**mantaoblasta** is a high-converting, modern landing page for an artisan live mantao catering service in Malaysia. It showcases golden crispy fried mantao with signature dips (Buttermilk, Salted Egg Butter, Sweet Pandan Glaze, and Sweet Sambal) for weddings, corporate galas, and private celebrations.
+- Homepage: `/` (existing `#/garden` links still work).
+- Event enquiry: `#/enquiry?package=mantao-silver&guests=100`.
+- Six event tiers, a guest slider with live RM totals, seven dipping sauces, and a swipeable event gallery.
+- Enquiries carry the selected package and guest count into a WhatsApp draft for the visitor to review and send.
 
-### Key Highlights
-- **Curated Packages**:
-  - **Silver Gathering (100–300 Pax)**: RM 880 / net
-  - **Gold Celebration (300–500 Pax)**: RM 1,480 / net
-  - **Platinum Grand (500–1,000 Pax)**: RM 2,880 / net
-- **Interactive Booking & Enquiry Flow**:
-  - Live Dip Selection & Flavor Customizer
-  - Real-time Date Picker & WhatsApp Direct Dispatch
-  - Standardized `DD/MM/YYYY` Malaysian date format
-- **Modern Tech Stack**: React 19, TypeScript, Tailwind CSS, Lucide Icons, Vite
+## Development
 
-## Getting Started
-
-### Prerequisites
-- Node.js (v18+)
-- npm or pnpm
-
-### Installation
-```bash
-npm install
-```
-
-### Development
-```bash
+```sh
+npm ci
 npm run dev
-```
-
-### Production Build & Preview
-```bash
 npm run build
-npm run preview
+npm run lint
 ```
 
-### Deploy to GitHub Pages
-To manually rebuild and push to the `gh-pages` branch:
-```bash
-npm run deploy
-```
-*(Automated CI/CD via GitHub Actions is also configured on every push to `main`)*
+React, TypeScript and Vite. Current package rates are in `src/data/eventPackages.ts`; sauces are in `src/data/sauces.ts`.
 
-## License
-MIT
+## Deployment
+
+Pushing to `main` runs `.github/workflows/deploy.yml` to build and deploy GitHub Pages. `public/CNAME` preserves the custom domain.

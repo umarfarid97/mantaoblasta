@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, ChefHat, ChevronLeft, ChevronRight, Flame, Heart, MessageCircle, Users, Utensils } from 'lucide-react';
-import { SIGNATURE_SAUCES } from '../data/packagesData';
+import { SIGNATURE_SAUCES } from '../data/sauces';
 import { EVENT_PACKAGES } from '../data/eventPackages';
 import { EventSlideshow } from '../components/EventSlideshow';
 import './garden.css';
@@ -29,7 +29,7 @@ export function GardenPage() {
   const pkg = EVENT_PACKAGES[packageIndex];
   const guests = guestCounts[pkg.id] ?? pkg.minPax;
   const total = Math.round(guests * (pkg.pricePerGuestMYR ?? 0) * 100) / 100;
-  const enquire = (chosenPackage = pkg) => { window.location.hash = `/garden/enquiry?package=${encodeURIComponent(chosenPackage.id)}&guests=${guestCounts[chosenPackage.id] ?? chosenPackage.minPax}`; };
+  const enquire = (chosenPackage = pkg) => { window.location.hash = `/enquiry?package=${encodeURIComponent(chosenPackage.id)}&guests=${guestCounts[chosenPackage.id] ?? chosenPackage.minPax}`; };
   const switchPackage = (step: number) => {
     setPackageIndex(index => (index + step + EVENT_PACKAGES.length) % EVENT_PACKAGES.length);
   };
@@ -39,7 +39,7 @@ export function GardenPage() {
     <a className="garden-skip" href="#garden-menu" onClick={e => { e.preventDefault(); document.getElementById('garden-menu')?.focus(); scrollTo('garden-menu'); }}>Skip to packages</a>
     <div className="garden-sheet">
       <header className="garden-header">
-        <a href="#/garden" className="garden-brand" aria-label="Blasta Empire home"><img src={asset('blasta-logo-dark.png')} alt="blasta EMPIRE" /></a>
+        <a href="./" className="garden-brand" aria-label="Blasta Empire home"><img src={asset('blasta-logo-dark.png')} alt="blasta EMPIRE" /></a>
         <nav aria-label="Main navigation"><button onClick={() => scrollTo('garden-menu')}>Packages</button><button onClick={() => scrollTo('garden-story')}>Our mantao</button><button onClick={() => scrollTo('garden-dips')}>Signature dips</button><button onClick={() => scrollTo('garden-contact')}>Contact</button></nav>
         <button className="garden-button" onClick={() => enquire()}>Plan your event <ArrowUpRight size={16} /></button>
       </header>
@@ -100,7 +100,7 @@ export function GardenPage() {
 
         <section className="garden-contact" id="garden-contact"><div><h2>Good food. Great company.</h2><p>Tell us what you’re celebrating.<br />We’ll help you find the right package.</p><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer"><MessageCircle size={18} /> +60 18-286 8402 <ArrowUpRight size={16} /></a></div><div><h2>Save a place for something golden.</h2><p>From 100 to 1,000 guests, there’s a little Blasta for everyone.</p><button className="garden-button" onClick={() => enquire()}>Start your event enquiry <ArrowUpRight size={16} /></button></div><div className="garden-footer-art" aria-hidden="true"><ChefHat size={70} strokeWidth={1} /><Utensils size={44} strokeWidth={1} /></div></section>
       </main>
-      <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span><a href="#/">View original website <ArrowUpRight size={14} /></a></footer>
+      <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span></footer>
     </div>
   </div>;
 }
