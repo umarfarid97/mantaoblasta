@@ -106,6 +106,9 @@
 .garden-tile-total>span{font-size:12px}.garden-tile-total>strong{font-size:30px;font-weight:600}.garden-tile-total>small{font-size:12px;color:#40583b}
 @media(max-width:680px){.garden-package-calculator .garden-package{padding:20px 14px;min-height:550px}.garden-package-picker{gap:5px;min-height:96px}.garden-package-calculator .garden-package-picker h3{font-size:23px}.garden-pax-control{padding:0 9px}.garden-package-calculator .garden-package-inclusions{min-height:63px;padding:0 10px}}
 .garden-pax-control .garden-pax-note{font-size:11px;line-height:1.5;margin:12px 0 0;color:#40583b}
+.garden-social-links{display:flex;gap:10px;margin-top:12px}
+.garden-contact .garden-social-links a{display:grid;place-items:center;width:44px;height:44px;border:1px solid #a5b399;border-radius:50%;color:var(--green);transition:background .2s,color .2s}
+.garden-contact .garden-social-links a:hover{background:var(--green);color:var(--cream)}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}

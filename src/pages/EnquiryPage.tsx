@@ -51,7 +51,7 @@ export function EnquiryPage() {
       `Event date: ${formattedDate}`, `Venue: ${venue.trim() || 'To be confirmed'}`,
       `Special requests: ${notes.trim() || 'None'}`, '', 'Please check availability for my event. Thank you!',
     ].join('\n');
-    window.open(`https://wa.me/60182868402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/60143452765?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     // WhatsApp opens a draft; the visitor reviews and sends it there.
     setOpened(true);
   };
@@ -76,6 +76,6 @@ export function EnquiryPage() {
         </div>
         <aside className="garden-enquiry-summary" aria-labelledby="enquiry-summary"><h2 id="enquiry-summary">Your package</h2><h3>{pkg.name}</h3><p>{pkg.paxRange}</p><ul>{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul><div className="garden-enquiry-total" aria-live="polite"><span>Estimated total</span><strong>{validGuests ? money(total) : '—'}</strong><small>{validGuests ? `${guests.toLocaleString()} guests × ${money(pkg.pricePerGuestMYR ?? 0)}` : pkg.openEndedGuests ? `Enter at least ${pkg.minPax} guests` : `Enter ${pkg.minPax}–${pkg.maxPax.toLocaleString()} guests`}</small></div><button className="garden-button" type="submit"><MessageCircle size={18} /> Continue on WhatsApp <ArrowUpRight size={16} /></button><p className="garden-enquiry-note">Review and send your enquiry in WhatsApp. Availability will be confirmed by our team.</p>{opened && <p className="garden-enquiry-feedback" role="status">Your WhatsApp draft is ready. If it didn’t open, allow pop-ups and try again.</p>}</aside>
       </form>
-    </main><footer className="garden-footer"><a href="./"><ArrowLeft size={14} /> Back to Blasta</a><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer">+60 18-286 8402</a></footer>
+    </main><footer className="garden-footer"><a href="./"><ArrowLeft size={14} /> Back to Blasta</a><a href="https://wa.me/60143452765" target="_blank" rel="noreferrer">+60 14-345 2765</a></footer>
   </div></div>;
 }

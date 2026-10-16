@@ -9,6 +9,10 @@ import './garden.css';
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
 const currentYear = new Date().getFullYear();
 
+function Instagram({ size }: { size: number }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
+}
+
 export function GardenPage() {
   useEffect(() => {
     document.documentElement.classList.add('garden-active');
@@ -99,7 +103,7 @@ export function GardenPage() {
 
         <section className="garden-story" id="garden-story"><div><h2>Our event history</h2><p>A few moments from our past events and pop-ups.</p></div><EventSlideshow /></section>
 
-        <section className="garden-contact" id="garden-contact"><div><h2>Good food. Great company.</h2><p>Tell us what you’re celebrating.<br />We’ll help you find the right package.</p><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer"><MessageCircle size={18} /> +60 18-286 8402 <ArrowUpRight size={16} /></a></div><div><h2>Save a place for something golden.</h2><p>From 100 guests to celebrations of 1,000 and beyond.</p><button className="garden-button" onClick={() => enquire()}>Start your event enquiry <ArrowUpRight size={16} /></button></div><div className="garden-footer-art" aria-hidden="true"><ChefHat size={70} strokeWidth={1} /><Utensils size={44} strokeWidth={1} /></div></section>
+        <section className="garden-contact" id="garden-contact"><div><h2>Good food. Great company.</h2><p>Tell us what you’re celebrating.<br />We’ll help you find the right package.</p><a href="https://wa.me/60143452765" target="_blank" rel="noreferrer"><MessageCircle size={18} /> +60 14-345 2765 <ArrowUpRight size={16} /></a><div className="garden-social-links"><a href="https://www.tiktok.com/@blastaempire_?_r=1&_t=ZS-9AbrNqmI8No" target="_blank" rel="noopener noreferrer" aria-label="Blasta Empire on TikTok"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M16 3c.3 2.6 1.8 4.1 4 4.3v3.2a8 8 0 0 1-4-1.3v7a6 6 0 1 1-5-5.9v3.3a2.8 2.8 0 1 0 1.8 2.6V3Z" /></svg></a><a href="https://www.instagram.com/blastaempire?obrf=d3hoemcyaTJ5cnc1" target="_blank" rel="noopener noreferrer" aria-label="Blasta Empire on Instagram"><Instagram size={21} /></a></div></div><div><h2>Save a place for something golden.</h2><p>From 100 guests to celebrations of 1,000 and beyond.</p><button className="garden-button" onClick={() => enquire()}>Start your event enquiry <ArrowUpRight size={16} /></button></div><div className="garden-footer-art" aria-hidden="true"><ChefHat size={70} strokeWidth={1} /><Utensils size={44} strokeWidth={1} /></div></section>
       </main>
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span></footer>
     </div>
