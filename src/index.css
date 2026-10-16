@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100vw;
+    width: 100%;
+    position: relative;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  #root {
+    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  h1, h2, h3, .font-heading {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .font-script {
+    font-family: 'Satisfy', cursive;
+  }
+
+  .font-brand {
+    font-family: 'Pacifico', cursive;
+  }
+}
+
+/* Dark wood grain pattern */
+.wood-bg {
+  background-color: #2F1B11;
+  background-image: 
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%),
+    repeating-linear-gradient(
+      0deg,
+      #341E13 0px,
+      #341E13 2px,
+      #2B180F 3px,
+      #27150D 6px,
+      #3B2216 7px,
+      #311B11 12px
+    );
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6);
+}
+
+.wood-dark {
+  background-color: #24130A;
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.5) 100%),
+    repeating-linear-gradient(
+      0deg,
+      #2B170E 0px,
+      #2B170E 2px,
+      #221109 3px,
+      #28150D 6px
+    );
+}
+
+/* Cream parchment texture */
+.cream-canvas {
+  background-color: #FAF5EB;
+  background-image: radial-gradient(#F0E5D3 0.75px, transparent 0.75px);
+  background-size: 16px 16px;
+}
+
+/* Sawtooth edge divider (top and bottom) */
+.sawtooth-bottom {
+  position: relative;
+}
+.sawtooth-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: radial-gradient(circle, transparent, transparent 50%, #FAF5EB 50%, #FAF5EB 100%);
+  background-size: 16px 16px;
+  z-index: 20;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #24130A;
+}
+::-webkit-scrollbar-thumb {
+  background: #8C5332;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4272F;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #C4272F;
+}
+
