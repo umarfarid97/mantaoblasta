@@ -20,9 +20,9 @@ export const FlavourModal: React.FC<FlavourModalProps> = ({ isOpen, onClose }) =
         <div className="px-6 py-5 wood-bg text-white flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-3">
             <img
-              src={`${import.meta.env.BASE_URL}blasta-logo.jpg`}
+              src={`${import.meta.env.BASE_URL}blasta-logo-white.png`}
               alt="blasta EMPIRE"
-              className="w-10 h-10 rounded-lg object-contain bg-white p-0.5 border border-white/20 shadow-md"
+              className="h-9 sm:h-10 w-auto object-contain drop-shadow-sm"
             />
             <div>
               <h3 className="font-heading font-extrabold text-lg sm:text-xl text-white uppercase tracking-wider">

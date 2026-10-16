@@ -26,25 +26,15 @@ export const Footer: React.FC<FooterProps> = () => {
           
           {/* Brand Info (Left Column) */}
           <div className="md:col-span-7 space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col items-start gap-1">
               <img
-                src={`${import.meta.env.BASE_URL}blasta-logo.jpg`}
+                src={`${import.meta.env.BASE_URL}blasta-logo-white.png`}
                 alt="blasta EMPIRE"
-                className="w-12 h-12 rounded-xl object-contain bg-white p-0.5 border border-white/20 shadow-md"
+                className="h-11 sm:h-13 w-auto object-contain drop-shadow-md"
               />
-              <div className="flex flex-col">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-heading font-extrabold text-3xl text-white tracking-tight">
-                    blasta
-                  </span>
-                  <span className="font-serif text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
-                    EMPIRE
-                  </span>
-                </div>
-                <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#BFA694]">
-                  Malaysian Catering Co.
-                </span>
-              </div>
+              <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-amber-300/90 pt-1">
+                Malaysian Catering Co.
+              </span>
             </div>
             
             <p className="text-xs sm:text-sm text-[#BFA694] leading-relaxed max-w-md">

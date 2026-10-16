@@ -41,19 +41,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <section className="relative cream-canvas overflow-hidden pt-10 pb-16 lg:pt-14 lg:pb-24 select-none">
       
       {/* ================= PARALLAX SCROLLING BACKGROUND ================= */}
-      {/* Parallax Layer 1: Giant Watermark Logo behind hero */}
+      {/* Parallax Layer 1: Giant Watermark Logo behind hero using actual logo */}
       <div
-        className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center opacity-[0.05] will-change-transform select-none"
+        className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.06] will-change-transform select-none"
         style={{
           transform: `translateY(${scrollY * 0.28}px)`,
         }}
       >
-        <span className="font-heading font-black text-[150px] sm:text-[260px] text-[#2F1B11] leading-none tracking-tighter">
-          blasta
-        </span>
-        <span className="font-serif uppercase tracking-[0.4em] text-[24px] sm:text-[44px] text-[#2F1B11] -mt-4 sm:-mt-8 font-bold">
-          EMPIRE
-        </span>
+        <img
+          src={`${import.meta.env.BASE_URL}blasta-logo-dark.png`}
+          alt=""
+          className="w-[360px] sm:w-[560px] max-w-[85vw] h-auto object-contain pointer-events-none"
+        />
       </div>
 
       {/* Parallax Layer 2: Subtle Floating Spice & Herb Accents */}
