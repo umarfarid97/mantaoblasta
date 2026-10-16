@@ -26,21 +26,31 @@ export const Footer: React.FC<FooterProps> = () => {
           
           {/* Brand Info (Left Column) */}
           <div className="md:col-span-7 space-y-4">
-            <div className="flex items-baseline gap-2">
-              <span className="font-brand text-4xl text-white tracking-normal">
-                mantao.
-              </span>
-              <span className="text-xs font-heading font-bold uppercase tracking-widest text-amber-300">
-                Malaysian Catering Co.
-              </span>
+            <div className="flex items-center gap-3">
+              <img
+                src={`${import.meta.env.BASE_URL}blasta-logo.jpg`}
+                alt="blasta EMPIRE"
+                className="w-12 h-12 rounded-xl object-contain bg-white p-0.5 border border-white/20 shadow-md"
+              />
+              <div className="flex flex-col">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-heading font-extrabold text-3xl text-white tracking-tight">
+                    blasta
+                  </span>
+                  <span className="font-serif text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
+                    EMPIRE
+                  </span>
+                </div>
+                <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#BFA694]">
+                  Malaysian Catering Co.
+                </span>
+              </div>
             </div>
             
             <p className="text-xs sm:text-sm text-[#BFA694] leading-relaxed max-w-md">
               Crispy on the outside, steamy soft on the inside. Malaysian-style golden fried mantao 
               paired with signature creamy buttermilk dip for corporate functions, private gatherings & celebrations.
             </p>
-
-
           </div>
 
           {/* Contact (Right Column) */}
@@ -66,7 +76,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex items-center justify-center text-center text-xs text-[#8C7565]">
-          <p>© {new Date().getFullYear()} mantao. Malaysian Kitchen. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} blasta EMPIRE. All rights reserved.</p>
         </div>
 
       </div>

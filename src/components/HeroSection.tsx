@@ -43,13 +43,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* ================= PARALLAX SCROLLING BACKGROUND ================= */}
       {/* Parallax Layer 1: Giant Watermark Logo behind hero */}
       <div
-        className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.06] will-change-transform"
+        className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center opacity-[0.05] will-change-transform select-none"
         style={{
           transform: `translateY(${scrollY * 0.28}px)`,
         }}
       >
-        <span className="font-brand text-[220px] sm:text-[340px] text-[#2F1B11] leading-none select-none tracking-tight">
-          mantao.
+        <span className="font-heading font-black text-[150px] sm:text-[260px] text-[#2F1B11] leading-none tracking-tighter">
+          blasta
+        </span>
+        <span className="font-serif uppercase tracking-[0.4em] text-[24px] sm:text-[44px] text-[#2F1B11] -mt-4 sm:-mt-8 font-bold">
+          EMPIRE
         </span>
       </div>
 

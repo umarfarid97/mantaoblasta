@@ -121,7 +121,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       .filter(Boolean)
       .join(', ');
 
-    const text = `Hello Mantao Catering Team!%0A%0AWe would like to book a Malaysian Fried Mantao Event Package:%0A• *Package:* ${encodeURIComponent(currentPkg.name)} (${encodeURIComponent(currentPkg.paxRange)})%0A• *Host / Organizer:* ${encodeURIComponent(hostName || 'Organizer')}%0A• *Contact Phone:* ${encodeURIComponent(phone || 'Not specified')}%0A• *Event Type:* ${encodeURIComponent(eventType || 'Special Event')}%0A• *Event Date:* ${encodeURIComponent(formatToDDMMYYYY(eventDate) || 'TBD (DD/MM/YYYY)')}%0A• *Venue / Location:* ${encodeURIComponent(venue || 'TBD')}%0A• *Guest Estimate:* ${guestCount} pax%0A• *Package Total:* ${encodeURIComponent(getPriceString())}%0A• *Selected Dips:* ${encodeURIComponent(dipsList || 'Creamy Buttermilk & Salted Egg')}%0A• *Special Requests:* ${encodeURIComponent(specialNotes || 'None')}%0A%0APlease check date availability for us. Thank you!`;
+    const text = `Hello blasta EMPIRE Catering Team!%0A%0AWe would like to book a Malaysian Fried Mantao Event Package:%0A• *Package:* ${encodeURIComponent(currentPkg.name)} (${encodeURIComponent(currentPkg.paxRange)})%0A• *Host / Organizer:* ${encodeURIComponent(hostName || 'Organizer')}%0A• *Contact Phone:* ${encodeURIComponent(phone || 'Not specified')}%0A• *Event Type:* ${encodeURIComponent(eventType || 'Special Event')}%0A• *Event Date:* ${encodeURIComponent(formatToDDMMYYYY(eventDate) || 'TBD (DD/MM/YYYY)')}%0A• *Venue / Location:* ${encodeURIComponent(venue || 'TBD')}%0A• *Guest Estimate:* ${guestCount} pax%0A• *Package Total:* ${encodeURIComponent(getPriceString())}%0A• *Selected Dips:* ${encodeURIComponent(dipsList || 'Creamy Buttermilk & Salted Egg')}%0A• *Special Requests:* ${encodeURIComponent(specialNotes || 'None')}%0A%0APlease check date availability for us. Thank you!`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
   };
 
@@ -152,12 +152,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         {/* Top Header */}
         <div className="px-6 py-5 wood-bg text-white flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-[#C4272F] text-white flex items-center justify-center font-brand text-lg">
-              m.
-            </div>
+            <img
+              src={`${import.meta.env.BASE_URL}blasta-logo.jpg`}
+              alt="blasta EMPIRE"
+              className="w-10 h-10 rounded-lg object-contain bg-white p-0.5 border border-white/20 shadow-md"
+            />
             <div>
               <h3 className="font-heading font-extrabold text-lg text-white uppercase tracking-wider">
-                Book Mantao Event Package
+                Book With blasta EMPIRE
               </h3>
               <p className="text-xs text-[#D4C3B5]">
                 Direct WhatsApp Booking to {WHATSAPP_DISPLAY}
