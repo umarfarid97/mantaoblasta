@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { ArrowDown, ArrowUpRight, ChefHat, Flame, Heart, Leaf, MessageCircle, Plus, Users, Utensils } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChefHat, Flame, Heart, Leaf, MessageCircle, Users, Utensils } from 'lucide-react';
 import { WEDDING_PACKAGES, SIGNATURE_SAUCES } from '../data/packagesData';
 import type { Currency, WeddingPackage } from '../types';
 import { EnquiryModal } from '../components/EnquiryModal';
-import { FlavourModal } from '../components/FlavourModal';
 import './garden.css';
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
@@ -28,7 +27,6 @@ export function GardenPage() {
   const [currency, setCurrency] = useState<Currency>('MYR');
   const [selected, setSelected] = useState<WeddingPackage>(WEDDING_PACKAGES[1]);
   const [enquiry, setEnquiry] = useState(false);
-  const [sauces, setSauces] = useState(false);
   const enquire = (pkg = selected) => { setSelected(pkg); setEnquiry(true); };
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
 
@@ -37,7 +35,7 @@ export function GardenPage() {
     <div className="garden-sheet">
       <header className="garden-header">
         <a href="#/garden" className="garden-brand" aria-label="Blasta Empire home"><img src={asset('blasta-logo-dark.png')} alt="blasta EMPIRE" /><span>Little buns. Big celebrations.</span></a>
-        <nav aria-label="Main navigation"><button onClick={() => scrollTo('garden-menu')}>Packages</button><button onClick={() => scrollTo('garden-story')}>Our mantao</button><button onClick={() => setSauces(true)}>Signature dips</button><button onClick={() => scrollTo('garden-contact')}>Contact</button></nav>
+        <nav aria-label="Main navigation"><button onClick={() => scrollTo('garden-menu')}>Packages</button><button onClick={() => scrollTo('garden-story')}>Our mantao</button><button onClick={() => scrollTo('garden-dips')}>Signature dips</button><button onClick={() => scrollTo('garden-contact')}>Contact</button></nav>
         <button className="garden-button" onClick={() => enquire()}>Plan your event <ArrowUpRight size={16} /></button>
       </header>
 
@@ -69,7 +67,7 @@ export function GardenPage() {
           </article>)}
         </section>
 
-        <section className="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <button className="garden-dip" key={sauce.id} onClick={() => setSauces(true)}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{sauce.spiceLevel}</small></span><Plus size={18} aria-hidden="true" /></button>)}</div><button className="garden-text-button" onClick={() => setSauces(true)}>Explore all signature dips <ArrowUpRight size={16} /></button></section>
+        <section className="garden-dips" id="garden-dips" aria-labelledby="garden-dips-title"><div className="garden-section-heading"><span /><h2 id="garden-dips-title">Meet your mantao’s other half</h2><span /></div><p className="garden-section-description">A little savoury, a little sweet. A whole lot to love.</p><div className="garden-dip-list">{SIGNATURE_SAUCES.map((sauce, i) => <div className="garden-dip" key={sauce.id}><span className={`garden-sauce garden-sauce-${i}`}><Utensils size={24} /></span><span><strong>{sauce.name}</strong><small>{sauce.spiceLevel} · {sauce.tags.join(' · ')}</small></span></div>)}</div></section>
 
         <section className="garden-story" id="garden-story"><div><Leaf size={34} /><h2>Small bites.<br /><em>Generous Malaysian soul.</em></h2><p>Golden fried mantao and our signature creamy spiced buttermilk dip. A comforting combination for corporate functions, private gatherings, and celebrations worth savouring.</p><button className="garden-button garden-green-button" onClick={() => enquire()}>Let’s make it a celebration <ArrowUpRight size={16} /></button></div><img src={asset('mantao-box.png')} alt="Blasta mantao served with signature creamy dip" loading="lazy" /></section>
 
@@ -78,6 +76,5 @@ export function GardenPage() {
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span><a href="#/">View original website <ArrowUpRight size={14} /></a></footer>
     </div>
     <EnquiryModal isOpen={enquiry} onClose={() => setEnquiry(false)} selectedPackage={selected} currency={currency} onSelectAnotherPackage={setSelected} />
-    <FlavourModal isOpen={sauces} onClose={() => setSauces(false)} />
   </div>;
 }
