@@ -45,16 +45,17 @@
 .garden-package-carousel .garden-package-arrow{top:145px}
 @media(max-width:680px){.garden-package-carousel .garden-package{min-height:350px;padding:28px 29px}.garden-package-carousel .garden-package h3{font-size:25px}.garden-package-carousel .garden-package-arrow{top:150px}.garden-package-inclusions{font-size:12px}}
 .garden-story>div:first-child{align-self:center}
-.garden-story>.garden-gallery{position:relative;padding:0;background:#263329;aspect-ratio:3 / 4;align-self:stretch;min-width:0}
-.garden-gallery-photos{position:absolute;inset:0 0 52px;overflow:hidden}
-.garden-gallery-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .7s ease;pointer-events:none}
-.garden-gallery-photos img.is-active{opacity:1}
-.garden-gallery-controls{position:absolute;bottom:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:center;gap:13px;background:#263329;color:#fff8ec}
+.garden-story>.garden-gallery{position:relative;padding:0;background:#263329;width:100%;align-self:stretch;min-width:0;overflow:hidden}
+.garden-gallery-photos{display:flex;width:100%;position:relative;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.garden-gallery-photos::-webkit-scrollbar{display:none}
+.garden-gallery-photos img{position:static;display:block;flex:0 0 100%;min-width:0;width:100%;height:auto;aspect-ratio:3 / 4;object-fit:contain;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
+.garden-gallery-controls{position:static;min-height:52px;display:flex;align-items:center;justify-content:center;gap:13px;background:#263329;color:#fff8ec}
 .garden-gallery-controls button{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:#fff8ec}
 .garden-gallery-controls button:hover{background:#395b43}
-.garden-gallery-controls button:disabled{opacity:.4;cursor:wait}
+.garden-gallery-controls button:disabled{opacity:.35;cursor:default}
 .garden-gallery-controls span{font-size:12px;font-variant-numeric:tabular-nums;min-width:42px;text-align:center}
 .garden-gallery-controls button svg{color:inherit}
+.garden-story .garden-gallery-hint{margin:0;padding:0 12px 15px;max-width:none;text-align:center;font-size:11px;color:#e2e9d9}
 /* Edge-to-edge canvas, including Safari's overscroll and browser chrome. */
 html.garden-active,html.garden-active body{background:#edf0e3}
 .garden-page{padding:0;background:var(--cream);min-height:100svh}
