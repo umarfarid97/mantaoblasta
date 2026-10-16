@@ -5,6 +5,7 @@ export interface WeddingPackage {
   paxRange: string;
   minPax: number;
   maxPax: number;
+  openEndedGuests?: boolean;
   prices: {
     MYR: number;
     SGD: number;

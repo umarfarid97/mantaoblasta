@@ -61,7 +61,7 @@ export function GardenPage() {
         </section>
 
         <section className="garden-packages garden-package-carousel garden-package-calculator" id="garden-menu" tabIndex={-1} aria-labelledby="garden-packages-title">
-          <div className="garden-package-intro"><h2 id="garden-packages-title">A gathering. A celebration.<br /><em>A little Blasta.</em></h2><p>Find a package for your people.<br />We’ll bring the golden goodness.</p></div>
+          <div className="garden-package-intro"><h2 id="garden-packages-title">Event packages &amp; pricing</h2><p>Choose your package and guest count to see your total.</p></div>
           <article className="garden-package" id="garden-current-package">
           <div className="garden-package-picker" tabIndex={0} aria-label="Swipe package name or use arrow keys to switch package" onKeyDown={event => {
             if (event.target !== event.currentTarget) return;
@@ -87,6 +87,7 @@ export function GardenPage() {
               <label htmlFor="garden-pax">Your guest count <output htmlFor="garden-pax">{guests.toLocaleString()} pax</output></label>
               <input id="garden-pax" type="range" min={pkg.minPax} max={pkg.maxPax} step={1} value={guests} onChange={event => setGuestCounts(previous => ({ ...previous, [pkg.id]: Number(event.target.value) }))} aria-valuetext={`${guests} guests`} />
               <div className="garden-pax-bounds"><span>{pkg.minPax.toLocaleString()} pax</span><span>{pkg.maxPax.toLocaleString()} pax</span></div>
+              {pkg.openEndedGuests && <p className="garden-pax-note">More than 1,000 guests? Enter your count on the enquiry page.</p>}
             </div>
             <div className="garden-tile-total" aria-live="polite"><span>Estimated total</span><strong>RM {total.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong><small>{guests.toLocaleString()} guests × RM {pkg.pricePerGuestMYR?.toFixed(2)}</small></div>
             <button onPointerDown={event => event.stopPropagation()} onClick={() => enquire(pkg)}>Enquire about this package <ArrowUpRight size={16} /></button>
@@ -98,7 +99,7 @@ export function GardenPage() {
 
         <section className="garden-story" id="garden-story"><div><h2>Our event history</h2><p>A few moments from our past events and pop-ups.</p></div><EventSlideshow /></section>
 
-        <section className="garden-contact" id="garden-contact"><div><h2>Good food. Great company.</h2><p>Tell us what you’re celebrating.<br />We’ll help you find the right package.</p><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer"><MessageCircle size={18} /> +60 18-286 8402 <ArrowUpRight size={16} /></a></div><div><h2>Save a place for something golden.</h2><p>From 100 to 1,000 guests, there’s a little Blasta for everyone.</p><button className="garden-button" onClick={() => enquire()}>Start your event enquiry <ArrowUpRight size={16} /></button></div><div className="garden-footer-art" aria-hidden="true"><ChefHat size={70} strokeWidth={1} /><Utensils size={44} strokeWidth={1} /></div></section>
+        <section className="garden-contact" id="garden-contact"><div><h2>Good food. Great company.</h2><p>Tell us what you’re celebrating.<br />We’ll help you find the right package.</p><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer"><MessageCircle size={18} /> +60 18-286 8402 <ArrowUpRight size={16} /></a></div><div><h2>Save a place for something golden.</h2><p>From 100 guests to celebrations of 1,000 and beyond.</p><button className="garden-button" onClick={() => enquire()}>Start your event enquiry <ArrowUpRight size={16} /></button></div><div className="garden-footer-art" aria-hidden="true"><ChefHat size={70} strokeWidth={1} /><Utensils size={44} strokeWidth={1} /></div></section>
       </main>
       <footer className="garden-footer"><span>© {currentYear} blasta EMPIRE</span><span>Malaysian comfort. Made to share.</span></footer>
     </div>

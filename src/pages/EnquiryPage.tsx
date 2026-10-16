@@ -15,7 +15,7 @@ export function EnquiryPage() {
   const [guests, setGuests] = useState(() => {
     const requestedGuests = Number(query.get('guests'));
     return query.has('guests') && Number.isInteger(requestedGuests)
-      ? Math.max(initialPackage.minPax, Math.min(initialPackage.maxPax, requestedGuests))
+      ? Math.max(initialPackage.minPax, initialPackage.openEndedGuests ? requestedGuests : Math.min(initialPackage.maxPax, requestedGuests))
       : initialPackage.exampleGuests ?? initialPackage.minPax;
   });
   const [name, setName] = useState('');
@@ -26,7 +26,7 @@ export function EnquiryPage() {
   const [notes, setNotes] = useState('');
   const [opened, setOpened] = useState(false);
   const total = Math.round(guests * (pkg.pricePerGuestMYR ?? 0) * 100) / 100;
-  const validGuests = Number.isInteger(guests) && guests >= pkg.minPax && guests <= pkg.maxPax;
+  const validGuests = Number.isSafeInteger(guests) && guests >= pkg.minPax && (pkg.openEndedGuests || guests <= pkg.maxPax);
   const [today] = useState(() => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kuala_Lumpur', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()));
 
   useEffect(() => {
@@ -63,8 +63,8 @@ export function EnquiryPage() {
       <form className="garden-enquiry-layout" onSubmit={submit}>
         <div className="garden-enquiry-fields">
           <section aria-labelledby="enquiry-event"><h2 id="enquiry-event">Your event</h2>
-            <label>Choose your package<select value={packageId} onChange={event => { const next = EVENT_PACKAGES.find(item => item.id === event.target.value)!; setPackageId(next.id); setGuests(current => Math.max(next.minPax, Math.min(next.maxPax, current))); setOpened(false); }}>{EVENT_PACKAGES.map(item => <option key={item.id} value={item.id}>{item.name} — {money(item.pricePerGuestMYR ?? 0)} / guest</option>)}</select></label>
-            <div className="garden-form-row"><label>Number of guests <span>(required)</span><input type="number" min={pkg.minPax} max={pkg.maxPax} step="1" required value={guests || ''} onChange={event => setGuests(Number(event.target.value))} aria-describedby="enquiry-guest-range" /><small id="enquiry-guest-range">{pkg.paxRange} for this tier</small></label><label>Event date <span>(required)</span><input type="date" min={today} required value={date} onChange={event => setDate(event.target.value)} /></label></div>
+            <label>Choose your package<select value={packageId} onChange={event => { const next = EVENT_PACKAGES.find(item => item.id === event.target.value)!; setPackageId(next.id); setGuests(current => Math.max(next.minPax, next.openEndedGuests ? current : Math.min(next.maxPax, current))); setOpened(false); }}>{EVENT_PACKAGES.map(item => <option key={item.id} value={item.id}>{item.name} — {money(item.pricePerGuestMYR ?? 0)} / guest</option>)}</select></label>
+            <div className="garden-form-row"><label>Number of guests <span>(required)</span><input type="number" min={pkg.minPax} max={pkg.openEndedGuests ? undefined : pkg.maxPax} step="1" required value={guests || ''} onChange={event => setGuests(Number(event.target.value))} aria-describedby="enquiry-guest-range" /><small id="enquiry-guest-range">{pkg.paxRange} for this tier{pkg.openEndedGuests ? ' · Counts above 1,000 welcome' : ''}</small></label><label>Event date <span>(required)</span><input type="date" min={today} required value={date} onChange={event => setDate(event.target.value)} /></label></div>
             <label>Event type<select value={eventType} onChange={event => setEventType(event.target.value)}>{['Corporate event', 'Private gathering', 'Birthday party', 'Wedding / Sanding', 'Exhibition / Festival', 'Annual dinner', 'Other celebration'].map(item => <option key={item}>{item}</option>)}</select></label>
             <label>Venue / location <span>(optional)</span><input autoComplete="street-address" value={venue} onChange={event => setVenue(event.target.value)} placeholder="Hotel, office, hall or outdoor venue" /></label>
           </section>
@@ -74,7 +74,7 @@ export function EnquiryPage() {
             <label>Special requests <span>(optional)</span><textarea rows={4} maxLength={2000} value={notes} onChange={event => setNotes(event.target.value)} placeholder="Serving time, access details, flavour preferences or anything else we should know" /></label>
           </section>
         </div>
-        <aside className="garden-enquiry-summary" aria-labelledby="enquiry-summary"><h2 id="enquiry-summary">Your package</h2><h3>{pkg.name}</h3><p>{pkg.paxRange}</p><ul>{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul><div className="garden-enquiry-total" aria-live="polite"><span>Estimated total</span><strong>{validGuests ? money(total) : '—'}</strong><small>{validGuests ? `${guests.toLocaleString()} guests × ${money(pkg.pricePerGuestMYR ?? 0)}` : `Enter ${pkg.minPax}–${pkg.maxPax.toLocaleString()} guests`}</small></div><button className="garden-button" type="submit"><MessageCircle size={18} /> Continue on WhatsApp <ArrowUpRight size={16} /></button><p className="garden-enquiry-note">Review and send your enquiry in WhatsApp. Availability will be confirmed by our team.</p>{opened && <p className="garden-enquiry-feedback" role="status">Your WhatsApp draft is ready. If it didn’t open, allow pop-ups and try again.</p>}</aside>
+        <aside className="garden-enquiry-summary" aria-labelledby="enquiry-summary"><h2 id="enquiry-summary">Your package</h2><h3>{pkg.name}</h3><p>{pkg.paxRange}</p><ul>{pkg.features.map(feature => <li key={feature}>{feature}</li>)}</ul><div className="garden-enquiry-total" aria-live="polite"><span>Estimated total</span><strong>{validGuests ? money(total) : '—'}</strong><small>{validGuests ? `${guests.toLocaleString()} guests × ${money(pkg.pricePerGuestMYR ?? 0)}` : pkg.openEndedGuests ? `Enter at least ${pkg.minPax} guests` : `Enter ${pkg.minPax}–${pkg.maxPax.toLocaleString()} guests`}</small></div><button className="garden-button" type="submit"><MessageCircle size={18} /> Continue on WhatsApp <ArrowUpRight size={16} /></button><p className="garden-enquiry-note">Review and send your enquiry in WhatsApp. Availability will be confirmed by our team.</p>{opened && <p className="garden-enquiry-feedback" role="status">Your WhatsApp draft is ready. If it didn’t open, allow pop-ups and try again.</p>}</aside>
       </form>
     </main><footer className="garden-footer"><a href="./"><ArrowLeft size={14} /> Back to Blasta</a><a href="https://wa.me/60182868402" target="_blank" rel="noreferrer">+60 18-286 8402</a></footer>
   </div></div>;

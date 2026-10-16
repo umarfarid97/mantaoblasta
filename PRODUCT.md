@@ -16,6 +16,8 @@ React, TypeScript and Vite. The reference-inspired cream and sage design replace
 
 ## Brand Commitments
 
+Platinum tiers accept 501+ guests with no 1,000-person cap on the enquiry form. Their homepage sliders still stop at 1,000; larger counts are entered on the enquiry page at the same Platinum per-guest rates. Silver and Gold retain their upper bounds.
+
 The garden page offers Golden Mantao and Mantao ButterClam in Silver (100–300), Gold (301–500) and Platinum (501–1,000) guest tiers. User-supplied rates per guest: Golden Mantao RM4.80 / RM4.50 / RM4.20; ButterClam RM9.00 / RM8.50 / RM8.00. Both include three mantao per guest; ButterClam includes approximately 60 g clam per guest, serving crew, booth setup and dismantling. Cards show example totals for 300 / 500 / 1,000 guests. Enquiry totals use the entered guest count. The supplied price table does not specify included dip quantities.
 
 Use Blasta branding and supplied photographs with the approved cream, sage green and orange design. Package totals update with the guest slider and the selected count carries into the enquiry page.
