@@ -56,6 +56,11 @@
 .garden-gallery-controls span{font-size:12px;font-variant-numeric:tabular-nums;min-width:42px;text-align:center}
 .garden-gallery-controls button svg{color:inherit}
 .garden-story .garden-gallery-hint{margin:0;padding:0;max-width:none;text-align:left;font-size:11px;color:#e2e9d9;white-space:nowrap;flex:1}
+@media(max-width:680px){
+  .garden-story>div:first-child{padding:16px 20px}
+  .garden-story h2{font-size:24px;margin:0 0 6px}
+  .garden-story>div:first-child p{font-size:12px;line-height:1.5;margin:0}
+}
 @media(min-width:681px){
   .garden-story{aspect-ratio:3 / 1;grid-template-columns:3fr 7fr;grid-template-rows:minmax(0,1fr)}
   .garden-story>div:first-child{padding:clamp(20px,2.5vw,35px)}
