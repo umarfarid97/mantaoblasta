@@ -48,7 +48,7 @@
 .garden-story>.garden-gallery{position:relative;padding:0;background:#263329;width:100%;align-self:stretch;min-width:0;overflow:hidden}
 .garden-gallery-photos{display:flex;width:100%;position:relative;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .garden-gallery-photos::-webkit-scrollbar{display:none}
-.garden-gallery-photos img{position:static;display:block;flex:0 0 100%;min-width:0;width:100%;height:auto;aspect-ratio:3 / 4;object-fit:cover;object-position:center;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
+.garden-gallery-photos img{position:static;display:block;flex:0 0 100%;min-width:0;width:100%;height:auto;aspect-ratio:4 / 3;object-fit:cover;object-position:center;scroll-snap-align:start;scroll-snap-stop:always;user-select:none}
 .garden-gallery-controls{position:static;min-height:56px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;gap:4px;background:#263329;color:#fff8ec}
 .garden-gallery-controls button{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:#fff8ec}
 .garden-gallery-controls button:hover{background:#395b43}
@@ -56,6 +56,15 @@
 .garden-gallery-controls span{font-size:12px;font-variant-numeric:tabular-nums;min-width:42px;text-align:center}
 .garden-gallery-controls button svg{color:inherit}
 .garden-story .garden-gallery-hint{margin:0;padding:0;max-width:none;text-align:left;font-size:11px;color:#e2e9d9;white-space:nowrap;flex:1}
+@media(min-width:681px){
+  .garden-story{aspect-ratio:3 / 1;grid-template-rows:minmax(0,1fr)}
+  .garden-story>div:first-child{padding:clamp(20px,2.5vw,35px)}
+  .garden-story h2{font-size:clamp(24px,2.4vw,34px)}
+  .garden-story>div:first-child p{margin-bottom:0}
+  .garden-story>.garden-gallery{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0}
+  .garden-story .garden-gallery-photos{min-height:0;height:100%}
+  .garden-story .garden-gallery-photos img{height:100%;aspect-ratio:auto}
+}
 .garden-back-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-size:13px;padding:12px 0}
 .garden-enquiry-main{max-width:1100px;margin:auto;padding:48px 5% 60px}
 .garden-enquiry-intro{margin-bottom:36px;max-width:620px}
