@@ -121,6 +121,21 @@
 .garden-tile-total>span{font-size:12px}.garden-tile-total>strong{font-size:30px;font-weight:600}.garden-tile-total>small{font-size:12px;color:#40583b}
 @media(max-width:680px){.garden-package-calculator .garden-package{padding:20px 14px;min-height:550px}.garden-package-picker{gap:5px;min-height:96px}.garden-package-calculator .garden-package-picker h3{font-size:23px}.garden-pax-control{padding:0 9px}.garden-package-calculator .garden-package-inclusions{min-height:63px;padding:0 10px}}
 .garden-pax-control .garden-pax-note{font-size:11px;line-height:1.5;margin:12px 0 0;color:#40583b}
+@media(min-width:681px){
+  .garden-package-calculator .garden-package-intro{padding-bottom:20px}
+  .garden-package-calculator .garden-package-intro h2{font-size:32px;margin-bottom:10px}
+  .garden-package-calculator .garden-package{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 28px;min-height:0;padding:20px 26px;align-items:start}
+  .garden-package-calculator .garden-package-picker{grid-column:1 / -1;min-height:52px;margin-bottom:8px}
+  .garden-package-calculator .garden-package-picker h3{font-size:25px}
+  .garden-package-calculator .garden-package>p{grid-column:1;grid-row:2;margin:0;text-align:left}
+  .garden-package-calculator .garden-package>strong{grid-column:1;grid-row:3;margin:0;text-align:left;font-size:30px}
+  .garden-package-calculator .garden-package-inclusions{grid-column:1;grid-row:4 / 6;min-height:0;margin:0;text-align:left;justify-content:flex-start}
+  .garden-package-calculator .garden-pax-control{grid-column:2;grid-row:2 / 4;margin:0}
+  .garden-package-calculator .garden-tile-total{grid-column:2;grid-row:4;gap:4px;margin:0}
+  .garden-package-calculator .garden-tile-total>strong{font-size:26px}
+  .garden-package-calculator .garden-package>button{grid-column:2;grid-row:5;margin:4px auto 0;min-height:44px}
+  .garden-package-calculator .garden-package-position{margin-top:18px}
+}
 .garden-social-links{display:flex;gap:10px;margin-top:12px}
 .garden-contact .garden-social-links a{display:grid;place-items:center;width:44px;height:44px;border:1px solid #a5b399;border-radius:50%;color:var(--green);transition:background .2s,color .2s}
 .garden-contact .garden-social-links a:hover{background:var(--green);color:var(--cream)}
